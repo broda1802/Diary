@@ -6,8 +6,8 @@ from patientdiary.models import *
 class PatientForm(forms.Form):
     first_name = forms.CharField(label="imie")
     last_name = forms.CharField(label='nazwisko')
-    Pesel = forms.IntegerField
-    phone = forms.IntegerField
+    Pesel = forms.IntegerField(label="Pesel")
+    phone = forms.IntegerField(label="telefon")
     my_history = forms.CharField(widget=forms.Textarea)
     disease = forms.ModelMultipleChoiceField('Disease')
     drug = forms.ModelMultipleChoiceField('Drugs')
@@ -15,8 +15,8 @@ class PatientForm(forms.Form):
 
 
 class Disease(forms.Form):
-    name = forms.CharField(max_length=128)
-    description = forms.CharField(widget=forms.Textarea)
+    name = forms.CharField(max_length=128, label="Nazwa choroby")
+    description = forms.CharField(widget=forms.Textarea, label="opis choroby")
 
 
 class Substance(forms.Form):
@@ -24,11 +24,11 @@ class Substance(forms.Form):
 
 
 class Drugs(forms.Form):
-    name = forms.CharField(max_length=30)
-    leaflet = forms.CharField(widget=forms.Textarea)
-    dosage = forms.IntegerField()
-    action = forms.CharField(max_length=128)
-    substances = forms.ModelMultipleChoiceField(Substance)
+    name = forms.CharField(max_length=30, label="nazwa")
+    leaflet = forms.CharField(widget=forms.Textarea, label="ulotka")
+    dosage = forms.IntegerField(label="dawka")
+    action = forms.CharField(max_length=128, label="działanie")
+    substances = forms.ModelMultipleChoiceField(Substance, label="substancja")
 
 
 class Group(forms.Form):
@@ -49,25 +49,26 @@ class Group(forms.Form):
         ("S",  "Narządy wzroku i słuchu"),
         ("V",  "Różne")
     )
-    name = forms.CharField(choices=NAME, max_length=128)
+    name = forms.CharField(choices=NAME, max_length=128, label="grupa substancji")
 
 
 class Clinic(forms.Form):
-    name = forms.CharField(max_length=128)
-    city = forms.CharField(max_length=128)
-    street = forms.CharField(max_length=50)
-    phone = forms.IntegerField()
+    name = forms.CharField(max_length=128, label="nazwa")
+    city = forms.CharField(max_length=128, label="miasto")
+    street = forms.CharField(max_length=50, label="ulica")
+    phone = forms.IntegerField(label="numer telefonu")
 
 
 class Pharmacy(forms.Form):
-    name = forms.CharField(max_length=128)
-    city = forms.CharField(max_length=128)
-    street = forms.CharField(max_length=50)
-    phone = forms.IntegerField()
-    opening_hours = forms.CharField(max_length=30)
+    name = forms.CharField(max_length=128, label="nazwa")
+    city = forms.CharField(max_length=128, label="miasto")
+    street = forms.CharField(max_length=50, label="ulica")
+    phone = forms.IntegerField(label="telefon")
+    opening_hours = forms.CharField(max_length=30, label="godziny otwarcia")
 
 
 class Doctor(forms.Form):
-    first_name = forms.CharField(max_length=30)
-    last_name = forms.CharField(max_length=30)
-    medical_specialization = forms.CharField(max_length=30)
+    first_name = forms.CharField(max_length=30, label="imie")
+    last_name = forms.CharField(max_length=30, label="nazwisko")
+    medical_specialization = forms.CharField(max_length=30, label="specjalizacja")
+

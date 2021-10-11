@@ -19,7 +19,14 @@ from patientdiary import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.IndexView.as_view(), name='index_view'),
-    # path('patient/', views.PatientView.as_view(), name='patient_view'),
+    path('views', views.IndexView.as_view(), name='index_view'),
+    path('patient/', views.PatientView.as_view(), name='patient_view'),
+    path('drugs/', views.DrugsView.as_view(), name='drugs_view'),
+    path('diseases/', views.DiseasesView.as_view(), name='diseases_view'),
+    path('doctor/', views.DoctorView.as_view(), name='doctor_view'),
+    path('pharmacy/', views.PharmacyView.as_view(), name='pharmacy_view'),
+    path('clinic/', views.ClinicView.as_view(), name='clinic_view'),
+    path('add_drug/', views.AddDrugView.as_view(), name='drug_add_view'),
+    path('add_disease/', views.AddDiseaseView.as_view(), name='disease_add_view'),
 
 ]
