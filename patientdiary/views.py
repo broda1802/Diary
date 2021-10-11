@@ -9,3 +9,36 @@ class IndexView(View):
     def get(self, request):
         response = render(request, 'base.html')
         return response
+
+
+class PatientView(View):
+    pass
+
+
+class DrugsView(View):
+    pass
+
+
+class DiseasesView(View):
+    pass
+
+
+class AddDrugView(View):
+    pass
+
+
+class AddDiseaseView(View):
+    pass
+
+
+class DoctorView(View):
+    pass
+
+
+class PharmacyView(View):
+    pass
+
+
+class ClinicView(View):
+    pass
+
