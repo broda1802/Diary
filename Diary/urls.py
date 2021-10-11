@@ -20,4 +20,6 @@ from patientdiary import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.IndexView.as_view(), name='index_view'),
+    # path('patient/', views.PatientView.as_view(), name='patient_view'),
+
 ]

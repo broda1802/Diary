@@ -9,3 +9,7 @@ class IndexView(View):
     def get(self, request):
         response = render(request, 'base.html')
         return response
+
+
+# class PatientView(View):
+
