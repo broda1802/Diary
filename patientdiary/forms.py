@@ -67,6 +67,17 @@ class Pharmacy(forms.Form):
     opening_hours = forms.CharField(max_length=30, label="godziny otwarcia")
 
 
+# class PharmacyModelForm(forms.ModelForm):
+#     class Meta:
+#         model = Pharmacy
+#         fields = '__all__'
+#         labels = {
+#             'phone': 'Telefon',
+#             'name': 'Nazwa',
+#
+#         }
+
+
 class Doctor(forms.Form):
     first_name = forms.CharField(max_length=30, label="imie")
     last_name = forms.CharField(max_length=30, label="nazwisko")
