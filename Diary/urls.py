@@ -20,7 +20,8 @@ from django.views.generic import TemplateView
 from patientdiary import views
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('login/', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('', views.IndexView.as_view(), name='index_view'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
