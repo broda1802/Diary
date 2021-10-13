@@ -59,6 +59,12 @@ class Clinic(forms.Form):
     phone = forms.IntegerField(label="numer telefonu")
 
 
+class ClinicModelForm(forms.ModelForm):
+    class Meta:
+        model = Clinic
+        fields = '__all__'
+
+
 class Pharmacy(forms.Form):
     name = forms.CharField(max_length=128, label="nazwa")
     city = forms.CharField(max_length=128, label="miasto")
@@ -67,19 +73,20 @@ class Pharmacy(forms.Form):
     opening_hours = forms.CharField(max_length=30, label="godziny otwarcia")
 
 
-# class PharmacyModelForm(forms.ModelForm):
-#     class Meta:
-#         model = Pharmacy
-#         fields = '__all__'
-#         labels = {
-#             'phone': 'Telefon',
-#             'name': 'Nazwa',
-#
-#         }
+class PharmacyModelForm(forms.ModelForm):
+    class Meta:
+        model = Pharmacy
+        fields = '__all__'
 
 
 class Doctor(forms.Form):
     first_name = forms.CharField(max_length=30, label="imie")
     last_name = forms.CharField(max_length=30, label="nazwisko")
     medical_specialization = forms.CharField(max_length=30, label="specjalizacja")
+
+
+class DoctorModelForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        fields = '__all__'
 

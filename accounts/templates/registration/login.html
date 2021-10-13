@@ -84,7 +84,7 @@
 					<h3 id="form-title">Logowanie</h3>
 				</div>
 				<div class="d-flex justify-content-center form_container">
-					<form method="POST" action="">
+					<form method="POST" >
                         {% csrf_token %}
 						<div class="input-group mb-3">
 							<div class="input-group-append">
@@ -100,7 +100,7 @@
 						</div>
 
 							<div class="d-flex justify-content-center mt-3 login_container">
-                                <a class="btn login_btn" href="{% url 'login' %}" type="submit" class="ml-2">Zaloguj</a>
+                                <button class="btn login_btn" type="submit" class="ml-2">Zaloguj</button>
 				   			</div>
 					</form>
 
@@ -122,8 +122,6 @@
 
 
 
-
-{##}
 {##}
 {##}
 {#{% extends 'base.html' %}#}

@@ -26,6 +26,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+          {% if user.is_authenticated %}
           <li class="nav-item">
           <a class="nav-link " aria-current="page" href="#">Moje choroby</a>
           </li>
@@ -36,13 +37,15 @@
           <a class="nav-link " aria-current="page" href="{% url 'contacts' %}">Kontakty</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="{% url 'login' %}">Zaloguj</a>
+          <a class="nav-link active" href="{% url 'logout' %}">Wyloguj</a>
         </li>
+        {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Wyloguj</a>
+            <a class="nav-link " href="{% url 'login' %}">Zaloguj</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="{% url 'signup' %}">Zarejestruj się</a>
+          {% endif %}
         </li>
       </ul>
     </div>

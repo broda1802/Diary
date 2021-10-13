@@ -33,38 +33,16 @@ class AddDiseaseView(View):
     pass
 
 
-# class ContactsView(DetailView):
-#
-#     def get(self, request):
-#         pharmacies = Pharmacy.objects.all()
-#         clinic = Clinic.objects.all()
-#         doctor = Doctor.objects.all()
-#         return render(request, 'contacts.html',{'pharmacies': pharmacies,
-#                                                 'clinic': clinic,
-#                                                 'doctor': doctor}
-#                       )
-#
-# class ContactsView(ListView):
-#
-#     model = CustomUser
-#     template_name = 'contacts.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['pharmacies'] = Pharmacy.objects.all()
-#         context['clinic'] = Clinic.objects.all()
-#         context['doctor'] = Doctor.objects.all()
-#         return context
+class ContactsView(ListView):
 
+    model = CustomUser
+    template_name = 'contacts.html'
 
-class DoctorView(View):
-    pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pharmacies'] = Pharmacy.objects.all()
+        context['clinics'] = Clinic.objects.all()
+        context['doctors'] = Doctor.objects.all()
+        return context
 
-
-class PharmacyView(View):
-    pass
-
-
-class ClinicView(View):
-    pass
 
