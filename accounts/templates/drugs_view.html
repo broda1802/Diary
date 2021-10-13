@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+    <br>
+    <br>
+
+ <table class="table" >
+
+  <thead>
+
+    <tr>
+      <th scope="col">Nazwa: </th>
+      <th scope="col">Dawka (mg)</th>
+      <th scope="col">Działanie</th>
+      <th scope="col">Substancja</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for drug in drugs_list %}
+    <tr>
+      <th scope="row">{{ drug.name}}</th>
+      <td>{{ drug.dosage}}</td>
+      <td>{{ drug.action}}</td>
+         {% for drug in drug.substances.all %}
+      <td>{{ drug}} </td>
+              {% endfor %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
+
+{##}
+{#    <ul>#}
+{#        {% for drug in drugs_list %}#}
+{#            <ul>#}
+{#                <li>{{ drug.name}}</li>#}
+{#                 <li>{{ drug.action}}</li>#}
+{#                 <li>{{ drug.dosage}}</li>#}
+{#                 <li>{{ drug.leaflet}}</li>#}
+{#                 <li>#}
+{#                     <ul>#}
+{#                {% for drug in drug.substances.all %}#}
+{#                    <li>{{ d }}</li>#}
+{#                    </ul>#}
+{##}
+{#                {% endfor %}#}
+{##}
+{#            </ul>#}
+{##}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% endblock %}#}

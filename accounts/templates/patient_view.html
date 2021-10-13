@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for patient in patient_list %}
+
+
+    <ul>
+
+
+            <ul>
+            <li>{{ patient.first_name }}</li>
+            <li>{{ patient.last_name }}</li>
+            <li>{{ patient.phone }}</li>
+            <li>
+            <ul>
+                {% for d in patient.disease.all %}
+                <li>{{ d }}</li>
+
+                {% endfor %}
+
+            </ul>
+            </li>
+            <li>{{ patient.clinic }}</li>
+             <ul>
+                {% for d in patient.drug.all %}
+                <li>{{ d }}</li>
+                {% endfor %}
+            </ul>
+            <li>{{ patient.Pesel }}</li>
+            <li>{{ patient.my_history}}</li>
+            </ul>
+        {% endfor %}
+    </ul>
+{% endblock %}
