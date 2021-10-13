@@ -10,6 +10,7 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
         {% for pharmacy in pharmacies %}
+
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
         {{ pharmacy.name }}
       </button>
@@ -26,24 +27,50 @@
         {% endfor %}
   </div>
   </div>
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+        {% for doctor in doctors %}
+
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        {{ doctor.first_name}} {{ doctor.last_name}}
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>
+            <ul>
+                <a>Specjalizacja: {{ doctor.medical_specialization }}</a><br>
+            </ul>
+      </div>
+    </div>
+        {% endfor %}
+  </div>
+  </div>
+
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+        {% for clinic in clinics %}
+
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        {{ clinic.name }}
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>
+            <ul>
+                <a>Godziny otwarcia: {{clinic.opening_hours }}</a><br>
+                <a>Miasto: {{ clinic.city }}</a>
+            </ul>
+      </div>
+    </div>
+        {% endfor %}
+  </div>
+  </div>
 </body>
 
 {% endblock %}
-
-{#{% for pharmacy in pharmacies %}#}
-{#    <ul>{{  }}#}
-{#    <li>#}
-{##}
-{#    </li>#}
-{#    </ul>#}
-{##}
-{##}
-{#      <li>{{  }} - {{ loan.user.username }} </li>#}
-{#        <ul>#}
-{#            {% for book in loan.books.all %}#}
-{#                <li>{{ book.title }}</li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-{#    {% endfor %}#}
-{##}
-{#{% endblock %}#}

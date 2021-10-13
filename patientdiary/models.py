@@ -43,24 +43,9 @@ class Drugs(models.Model):
 
 
 class Group(models.Model):
-    parent = models.ForeignKey('Group', null=True, on_delete=models.CASCADE)
-    NAME = (
-        ("A", "Przewód pokarmowy i metabolizm"),
-        ("B", "Krew i układ krwiotwórczy"),
-        ("C", "Układ sercowo-naczyniowy"),
-        ("D", "Dermatologia"),
-        ("G", "Układ moczowo-płciowy i hormony płciowe"),
-        ("H", "Leki hormonalne do stosowania wewnętrznego"),
-        ("J", "Leki przeciwinfekcyjne"),
-        ("L",  "Leki przeciwnowotworowe i immunomodulujące"),
-        ("M",  "Układ mięśniowo-szkieletowy"),
-        ("N",  "Ośrodkowy układ nerwowy"),
-        ("P", "Leki przeciwpasożytnicze, owadobójcze i repelenty"),
-        ("R",  "Układ oddechowy"),
-        ("S",  "Narządy wzroku i słuchu"),
-        ("V",  "Różne")
-    )
-    name = models.CharField(choices=NAME, max_length=128)
+    parent = models.ForeignKey('Group', null=True, blank=True, on_delete=models.CASCADE)
+    symbol = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
 
     def __str__(self):
         return self.name
