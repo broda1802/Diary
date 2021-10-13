@@ -1,35 +1,105 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-{% for patient in patient_list %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
-    <ul>
 
+    <form class="form-horizontal">
 
-            <ul>
-            <li>{{ patient.first_name }}</li>
-            <li>{{ patient.last_name }}</li>
-            <li>{{ patient.phone }}</li>
-            <li>
-            <ul>
-                {% for d in patient.disease.all %}
-                <li>{{ d }}</li>
+        {% for patient in patient_list %}
+        <div class="form-group">
+          <label class="col-md-4 control-label" >Imię</label>
+          <div class="col-md-4">
+              <text class="form-control"> {{ patient.first_name }}</text>
+          </div>
+        </div>
 
-                {% endfor %}
+        <div class="form-group">
+          <label class="col-md-4 control-label">Nazwisko</label>
+          <div class="col-md-4">
+                <text class="form-control"> {{ patient.last_name }}</text>
+          </div>
+        </div>
 
-            </ul>
-            </li>
-            <li>{{ patient.clinic }}</li>
-             <ul>
-                {% for d in patient.drug.all %}
-                <li>{{ d }}</li>
-                {% endfor %}
-            </ul>
-            <li>{{ patient.Pesel }}</li>
-            <li>{{ patient.my_history}}</li>
-            </ul>
-        {% endfor %}
-    </ul>
+        <div class="form-group">
+          <label class="col-md-4 control-label">Pesel</label>
+          <div class="col-md-4">
+               <text class="form-control"> {{ patient.Pesel }}</text>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Telefon</label>
+          <div class="col-md-4">
+                <text class="form-control"> {{ patient.phone }}</text>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" >Przychodnia</label>
+          <div class="col-md-4">
+              <text class="form-control"> {{ patient.clinic }}</text>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Moja historia choroby</label>
+          <div class="col-md-4">
+              <textarea class="form-control ">{{ patient.my_history }}</textarea>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" >Na co choruję</label>
+          <div class="col-md-4">
+             {% for disease in patient.disease.all %}
+                <textarea class="form-control ">{{ disease }}</textarea>
+             {% endfor %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" >Moje leki</label>
+          <div class="col-md-4">
+              {% for drug in patient.drug.all %}
+                  <textarea class="form-control ">{{ drug.name }} {{ drug.dosage }}</textarea>
+              {% endfor %}
+          </div>
+        </div>
+    </form>
+
+    {% endfor %}
 {% endblock %}
+
+
+
+{# {% for patient in patient_list %}#}
+{#        <ul>#}
+{#            <ul>#}
+{#            <li>{{ patient.first_name }}</li>#}
+{#            <li>{{ patient.last_name }}</li>#}
+{#            <li>{{ patient.phone }}</li>#}
+{#            <li>#}
+{#            <ul>#}
+{#                {% for d in patient.disease.all %}#}
+{#                <li>{{ d }}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#            </li>#}
+{#            <li>{{ patient.clinic }}</li>#}
+{#             <ul>#}
+{#                {% for d in patient.drug.all %}#}
+{#                <li>{{ d }}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#            <li>{{ patient.Pesel }}</li>#}
+{#            <li>{{ patient.my_history}}</li>#}
+{#            </ul>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% endblock %}#}

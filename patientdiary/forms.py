@@ -17,11 +17,11 @@ class PatientModelForm(forms.ModelForm):
             'drug': 'lek',
             'clinic': 'przychodnia'
         }
-        widgets = {
-            'disease': forms.CheckboxSelectMultiple,
-            'drug': forms.CheckboxSelectMultiple,
-            'clinic': forms.ModelChoiceField(queryset=Clinic.objects.all())
-        }
+        # widgets = {
+        #     'disease': forms.CheckboxSelectMultiple,
+        #     'drug': forms.CheckboxSelectMultiple,
+        #     'clinic': forms.ModelChoiceField(queryset=Clinic.objects.all(), to_field_name='clinic')
+        # }
 
 
 class DiseaseModelForm(forms.ModelForm):
@@ -54,9 +54,9 @@ class DrugsModelForm(forms.ModelForm):
             'action': 'działanie',
             'substances': 'substancja'
         }
-        widgets = {
-            'substances': forms.CheckboxSelectMultiple
-        }
+        # widgets = {
+        #     'substances': forms.CheckboxSelectMultiple
+        # }
 
 
 class GroupModelForm(forms.ModelForm):
@@ -68,9 +68,9 @@ class GroupModelForm(forms.ModelForm):
             'name': 'nazwa grupy',
             'symbol': 'symbol'
         }
-        widgets = {
-            'parent': forms.ModelChoiceField(queryset=Group.objects.all())
-        }
+        # widgets = {
+        #     'parent': forms.ModelChoiceField(queryset=Group.objects.all(), to_field_name='parent')
+        # }
 
 
 class ClinicModelForm(forms.ModelForm):
