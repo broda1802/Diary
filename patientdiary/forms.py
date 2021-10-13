@@ -3,90 +3,109 @@ from django.core.exceptions import ValidationError
 
 from patientdiary.models import *
 
-class PatientForm(forms.Form):
-    first_name = forms.CharField(label="imie")
-    last_name = forms.CharField(label='nazwisko')
-    Pesel = forms.IntegerField(label="Pesel")
-    phone = forms.IntegerField(label="telefon")
-    my_history = forms.CharField(widget=forms.Textarea)
-    disease = forms.ModelMultipleChoiceField('Disease')
-    drug = forms.ModelMultipleChoiceField('Drugs')
-    clinic = forms.ModelChoiceField('Clinic', on_delete=models.CASCADE)
+
+class PatientModelForm(forms.ModelForm):
+    class Meta:
+        fields = '__all__'
+        labels = {
+            'first_name': 'imie',
+            'last_name': 'nazwisko',
+            'Pesel': 'Pesel',
+            'phone': 'telefon',
+            'my_history': 'moja historia',
+            'disease': 'choroba',
+            'drug': 'lek',
+            'clinic': 'przychodnia'
+        }
+        widgets= {
+            'disease': forms.CheckboxSelectMultiple,
+            'drug': forms.CheckboxSelectMultiple,
+            'clinic': forms.ModelChoiceField(queryset=Clinic.objects.all())
+        }
 
 
-class Disease(forms.Form):
-    name = forms.CharField(max_length=128, label="Nazwa choroby")
-    description = forms.CharField(widget=forms.Textarea, label="opis choroby")
+class DiseaseModelForm(forms.ModelForm):
+    class Meta:
+        model = Disease
+        fields = '__all__'
+        labels = {
+            'name': 'nazwa',
+            'description': 'opis'
+        }
 
 
-class Substance(forms.Form):
-    substance_name = models.CharField(max_length=128)
+class SubstanceModelForm(forms.ModelForm):
+    class Meta:
+        model = Substance
+        fields = '__all__'
+        labels = {
+            'substance_name': 'nazwa substancji'
+        }
 
 
-class Drugs(forms.Form):
-    name = forms.CharField(max_length=30, label="nazwa")
-    leaflet = forms.CharField(widget=forms.Textarea, label="ulotka")
-    dosage = forms.IntegerField(label="dawka")
-    action = forms.CharField(max_length=128, label="działanie")
-    substances = forms.ModelMultipleChoiceField(Substance, label="substancja")
+class DrugsModelForm(forms.ModelForm):
+    class Meta:
+        model = Drugs
+        fields = '__all__'
+        labels = {
+            'name': 'nazwa',
+            'leaflet': 'ulotka',
+            'dosage': 'dawka',
+            'action': 'działanie',
+            'substances': 'substancja'
+        }
+        widgets = {
+            'substances': forms.CheckboxSelectMultiple
+        }
 
 
-class Group(forms.Form):
-    parent = forms.ModelChoiceField('Group', null=True, on_delete=models.CASCADE)
-    NAME = (
-        ("A", "Przewód pokarmowy i metabolizm"),
-        ("B", "Krew i układ krwiotwórczy"),
-        ("C", "Układ sercowo-naczyniowy"),
-        ("D", "Dermatologia"),
-        ("G", "Układ moczowo-płciowy i hormony płciowe"),
-        ("H", "Leki hormonalne do stosowania wewnętrznego"),
-        ("J", "Leki przeciwinfekcyjne"),
-        ("L",  "Leki przeciwnowotworowe i immunomodulujące"),
-        ("M",  "Układ mięśniowo-szkieletowy"),
-        ("N",  "Ośrodkowy układ nerwowy"),
-        ("P", "Leki przeciwpasożytnicze, owadobójcze i repelenty"),
-        ("R",  "Układ oddechowy"),
-        ("S",  "Narządy wzroku i słuchu"),
-        ("V",  "Różne")
-    )
-    name = forms.CharField(choices=NAME, max_length=128, label="grupa substancji")
-
-
-class Clinic(forms.Form):
-    name = forms.CharField(max_length=128, label="nazwa")
-    city = forms.CharField(max_length=128, label="miasto")
-    street = forms.CharField(max_length=50, label="ulica")
-    phone = forms.IntegerField(label="numer telefonu")
+class GroupModelForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = '__all__'
+        labels = {
+            'parent': 'grupa',
+            'name': 'nazwa grupy',
+            'symbol': 'symbol'
+        }
+        widgets = {
+            'parent': forms.ModelChoiceField(queryset=Group.objects.all())
+        }
 
 
 class ClinicModelForm(forms.ModelForm):
     class Meta:
         model = Clinic
         fields = '__all__'
-
-
-class Pharmacy(forms.Form):
-    name = forms.CharField(max_length=128, label="nazwa")
-    city = forms.CharField(max_length=128, label="miasto")
-    street = forms.CharField(max_length=50, label="ulica")
-    phone = forms.IntegerField(label="telefon")
-    opening_hours = forms.CharField(max_length=30, label="godziny otwarcia")
+        labels = {
+            'name': 'nazwa',
+            'city': 'miasto',
+            'street': 'ulica',
+            'phone': 'numer telefonu'
+        }
 
 
 class PharmacyModelForm(forms.ModelForm):
     class Meta:
         model = Pharmacy
         fields = '__all__'
-
-
-class Doctor(forms.Form):
-    first_name = forms.CharField(max_length=30, label="imie")
-    last_name = forms.CharField(max_length=30, label="nazwisko")
-    medical_specialization = forms.CharField(max_length=30, label="specjalizacja")
+        labels = {
+            'name': 'nazwa',
+            'city': 'miasto',
+            'street': 'ulica',
+            'phone': 'numer telefonu',
+            'opening_hours': 'godziny otwarcia'
+        }
 
 
 class DoctorModelForm(forms.ModelForm):
     class Meta:
         model = Doctor
         fields = '__all__'
+        labels = {
+            'first_name': 'imie',
+            'last_name': 'imie',
+            'medical_specialization': 'specjalizacja'
+        }
+
 

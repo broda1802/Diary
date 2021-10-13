@@ -28,7 +28,7 @@ urlpatterns = [
     path('patient/', views.PatientView.as_view(), name='patient_view'),
     path('drugs/', views.DrugsView.as_view(), name='drugs_view'),
     path('diseases/', views.DiseasesView.as_view(), name='diseases_view'),
-    path('contacts/', views.ContactsView.as_view(), name='contacts'),
+    path('contacts/', views.ContactsListView.as_view(), name='contacts'),
     path('add_drug/', views.AddDrugView.as_view(), name='drug_add_view'),
     path('add_disease/', views.AddDiseaseView.as_view(), name='disease_add_view'),
 
