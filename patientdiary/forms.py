@@ -17,7 +17,7 @@ class PatientModelForm(forms.ModelForm):
             'drug': 'lek',
             'clinic': 'przychodnia'
         }
-        widgets= {
+        widgets = {
             'disease': forms.CheckboxSelectMultiple,
             'drug': forms.CheckboxSelectMultiple,
             'clinic': forms.ModelChoiceField(queryset=Clinic.objects.all())
