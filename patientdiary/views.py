@@ -33,7 +33,7 @@ class AddDiseaseView(View):
     pass
 
 
-class ContactsView(ListView):
+class ContactsListView(ListView):
 
     model = CustomUser
     template_name = 'contacts.html'
