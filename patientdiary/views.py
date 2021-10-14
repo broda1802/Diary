@@ -79,7 +79,6 @@ class DeleteDiseaseView(DeleteView):
 class DeleteDrugView(DeleteView):
     model = Drugs
     template_name = 'form.html'
-    fields = '__all__'
     success_url = "/drugs/"
 
 

@@ -1,8 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <p>{{ drugs.name }}<p>
+
+    <div class="middle"
+
+    <p>{{ drugs.name }}</p>
     <p>{{ drugs.dosage }}</p>
+    {% for substance in drugs.substances.all%}
+    <p>{{ substance}}</p>
+    {% endfor %}
+    <p>{{ drugs.leaflet }}</p>
+    <p>{{ drugs.action }}</p>
+
+</div>
+
+
 
 
 
