@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="container">
 <br>
     <br>
     <br>
+
 <style>
 
 table{
@@ -11,6 +13,12 @@ table{
 }
 
 </style>
+
+    <div class="container text-center">
+         <a href="{% url 'drug_add_view' %}">
+            <button type="button" class="btn btn-secondary">Dodaj lek   </button></a>
+    </div>
+<br>
 
  <table class="table table-sm" >
 
@@ -21,10 +29,11 @@ table{
       <th scope="col">Dawka (mg)</th>
       <th scope="col">Działanie</th>
       <th scope="col">Substancja</th>
-      <th scope="col">Usuń lek</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
+
   {% for drug in drugs_list %}
     <tr>
       <th scope="row"><a class="nav-link active" href="{% url 'drug_detail_view' drug.pk %}">{{ drug.name}} </a> </th>
@@ -40,13 +49,12 @@ table{
             <button type="button" class="btn btn-danger">Usuń</button></a>
 
       </td>
-
     </tr>
   {% endfor %}
   </tbody>
 </table>
 
-
+</div>
 {% endblock %}
 
 {##}

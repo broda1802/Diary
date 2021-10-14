@@ -8,6 +8,7 @@ from patientdiary.forms import DiseaseModelForm, DrugsModelForm
 from patientdiary.models import Patient, Drugs, Doctor, Disease, Substance, Group, Clinic, Pharmacy
 # Create your views here.
 
+
 class IndexView(View):
 
     def get(self, request):
@@ -32,14 +33,16 @@ class DiseasesListView(ListView):
 
 class AddDrugView(CreateView):
     model = Drugs
-    template_name = 'add_drug_view.html'
+    template_name = 'form.html'
     form_class = DrugsModelForm
+    success_url = "/drugs/"
 
 
 class AddDiseaseView(CreateView):
     model = Disease
-    template_name = 'add_disease_view.html'
+    template_name = 'form.html'
     form_class = DiseaseModelForm
+    success_url = "/diseases/"
 
 
 class ContactsListView(ListView):
@@ -58,7 +61,7 @@ class ContactsListView(ListView):
 class UpdateDiseaseView(UpdateView):
     model = Disease
     template_name = 'form.html'
-    fields = '__all__'
+    form_class = DiseaseModelForm
     success_url = "/diseases/"
 
 
@@ -67,7 +70,6 @@ class UpdateDrugView(UpdateView):
     template_name = 'form.html'
     form_class = DrugsModelForm
     success_url = "/drugs/"
-
 
 
 class DeleteDiseaseView(DeleteView):
@@ -90,7 +92,6 @@ class DiseaseDetailView(DetailView):
 
 class DrugDetailView(DetailView):
     model = Drugs
-
     template_name = 'drug_detail_view.html'
     fields = '__all__'
 

@@ -2,12 +2,60 @@
 
 {% block content %}
 
-    <ul>
-        {% for disease in disease_list %}
-            <ul>
-            <li>{{ disease.name}}</li>
-            <li>{{ disease.description}}</li>
-            </ul>
-        {% endfor %}
-    </ul>
+
+<div class="container text-center">
+<br>
+    <br>
+    <br>
+<style>
+table{
+    background-color: white;
+}
+</style>
+
+   <div class="container text-center">
+          <a href="{% url 'disease_add_view' %}">
+      <button type="button" class="btn btn-secondary">Dodaj chorobę   </button></a
+    </div>
+
+<table class="table " >
+<br>
+  <tbody>
+  <br>
+  {% for disease in disease_list %}
+    <tr>
+      <th scope="row"><a class="nav-link active" href="{% url 'disease_detail_view' disease.pk %}">{{ disease.name}} </a></th>
+
+        <th scope></th>
+        <td>
+        <a href="{% url 'disease_update_view' disease.pk %}">
+            <button type="button" class="btn btn-primary">Edytuj</button></a>
+        <a href="{% url 'disease_delete_view' disease.pk %}">
+            <button type="button" class="btn btn-danger">Usuń</button></a>
+        </td>
+        </th>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+</div>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,11 +17,11 @@ class PatientModelForm(forms.ModelForm):
             'drug': 'lek',
             'clinic': 'przychodnia'
         }
-        # widgets = {
-        #     'disease': forms.CheckboxSelectMultiple,
-        #     'drug': forms.CheckboxSelectMultiple,
-        #     'clinic': forms.ModelChoiceField(queryset=Clinic.objects.all(), to_field_name='clinic')
-        # }
+        widgets = {
+            'disease': forms.CheckboxSelectMultiple,
+            'drug': forms.CheckboxSelectMultiple,
+            'clinic': forms.ModelChoiceField(queryset=Clinic.objects.all(), to_field_name='clinic')
+        }
 
 
 class DiseaseModelForm(forms.ModelForm):
