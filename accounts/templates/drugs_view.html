@@ -4,8 +4,15 @@
 <br>
     <br>
     <br>
+<style>
 
- <table class="table" >
+table{
+    background-color: white;
+}
+
+</style>
+
+ <table class="table table-sm" >
 
   <thead>
 
@@ -14,17 +21,26 @@
       <th scope="col">Dawka (mg)</th>
       <th scope="col">Działanie</th>
       <th scope="col">Substancja</th>
+      <th scope="col">Usuń lek</th>
     </tr>
   </thead>
   <tbody>
   {% for drug in drugs_list %}
     <tr>
-      <th scope="row">{{ drug.name}}</th>
+      <th scope="row"><a class="nav-link active" href="{% url 'drug_detail_view' drug.pk %}">{{ drug.name}} </a> </th>
       <td>{{ drug.dosage}}</td>
       <td>{{ drug.action}}</td>
-         {% for drug in drug.substances.all %}
+      {% for drug in drug.substances.all %}
       <td>{{ drug}} </td>
-              {% endfor %}
+         {% endfor %}
+      <td><a href="{% url 'drug_update_view' drug.pk %}">
+            <button type="button" class="btn btn-primary">Edytuj</button></a>
+
+        <a href="{% url 'drug_delete_view' drug.pk %}">
+            <button type="button" class="btn btn-danger">Usuń</button></a>
+
+      </td>
+
     </tr>
   {% endfor %}
   </tbody>

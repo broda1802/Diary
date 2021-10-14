@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import DetailView, ListView, DeleteView, UpdateView, CreateView
@@ -58,40 +59,38 @@ class UpdateDiseaseView(UpdateView):
     model = Disease
     template_name = 'form.html'
     fields = '__all__'
-    success_url = "/"
+    success_url = "/diseases/"
 
 
 class UpdateDrugView(UpdateView):
     model = Drugs
     template_name = 'form.html'
-    fields = '__all__'
-    success_url = "/"
+    form_class = DrugsModelForm
+    success_url = "/drugs/"
 
 
 
 class DeleteDiseaseView(DeleteView):
-    model = Drugs
+    model = Disease
     template_name = 'form.html'
-    fields = '__all__'
-    success_url = "/"
+    success_url = "/diseases/"
 
 
 class DeleteDrugView(DeleteView):
     model = Drugs
     template_name = 'form.html'
-    fields = '__all__'
-    success_url = "/"
+    success_url = "/drugs/"
 
 
 class DiseaseDetailView(DetailView):
-    model = Drugs
+    model = Disease
     template_name = 'disease_detail_view.html'
     fields = '__all__'
-    success_url = "/"
 
 
 class DrugDetailView(DetailView):
     model = Drugs
+
     template_name = 'drug_detail_view.html'
     fields = '__all__'
-    success_url = "/"
+

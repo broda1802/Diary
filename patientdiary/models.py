@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
+
 
 class Patient(models.Model):
     first_name = models.CharField(max_length=30)
@@ -20,6 +22,12 @@ class Disease(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField()
 
+    def get_absolute_url(self):
+        return reverse('disease_detail_view', args=(self.pk,))
+
+    def get_delete_url(self):
+        return reverse('disease_delete_view', args=(self.pk,))
+
     def __str__(self):
         return self.name
 
@@ -37,6 +45,12 @@ class Drugs(models.Model):
     dosage = models.IntegerField()
     action = models.CharField(max_length=128)
     substances = models.ManyToManyField(Substance)
+
+    def get_absolute_url(self):
+        return reverse('drug_detail_view', args=(self.pk,))
+
+    def get_delete_url(self):
+        return reverse('drug_delete_view', args=(self.pk,))
 
     def __str__(self):
         return self.name
