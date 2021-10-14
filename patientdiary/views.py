@@ -5,7 +5,7 @@ from django.views.generic import DetailView, ListView, DeleteView, UpdateView, C
 
 from accounts.models import CustomUser
 from patientdiary.forms import DiseaseModelForm, DrugsModelForm
-from patientdiary.models import Patient, Drugs, Doctor, Disease, Substance, Group, Clinic, Pharmacy
+from patientdiary.models import Patient, Drugs, Doctor, Disease, Clinic, Pharmacy
 # Create your views here.
 
 
