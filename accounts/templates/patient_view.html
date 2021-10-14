@@ -1,122 +1,100 @@
 {% extends "base.html" %}
 {% block content %}
 
-
-<style>
-
-form
-{
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-}
-
-
-form {
-    display: inline-block;
-}
-</style>
-
-<body>
-
-    <form class="form-horizontal">
-
-        {% for patient in patient_list %}
-        <div class="form-group">
-          <label class="col-md-4 control-label" >Imię</label>
-          <div class="col-md-4">
-              <text class="form-control"> {{ patient.first_name }}</text>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label">Nazwisko</label>
-          <div class="col-md-4">
-                <text class="form-control"> {{ patient.last_name }}</text>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label">Pesel</label>
-          <div class="col-md-4">
-               <text class="form-control"> {{ patient.Pesel }}</text>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label">Telefon</label>
-          <div class="col-md-4">
-                <text class="form-control"> {{ patient.phone }}</text>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" >Przychodnia</label>
-          <div class="col-md-4">
-              <text class="form-control"> {{ patient.clinic }}</text>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label">Moja historia choroby</label>
-          <div class="col-md-4">
-              <textarea class="form-control ">{{ patient.my_history }}</textarea>
-
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" >Na co choruję</label>
-          <div class="col-md-4">
-             {% for disease in patient.disease.all %}
-                <textarea class="form-control ">{{ disease }}</textarea>
-             {% endfor %}
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" >Moje leki</label>
-          <div class="col-md-4">
-              {% for drug in patient.drug.all %}
-                  <textarea class="form-control ">{{ drug.name }} {{ drug.dosage }}</textarea>
-              {% endfor %}
-{#          <a href="{% url 'drug_update_view' drug.pk %}">#}
-{#            <button type="button" class="btn btn-primary">Edytuj</button></a>#}
-
-
-          </div>
-        </div>
-    </form>
-
-</body>
-    {% endfor %}
-{% endblock %}
-
-
-
-{# {% for patient in patient_list %}#}
-{#        <ul>#}
-{#            <ul>#}
-{#            <li>{{ patient.first_name }}</li>#}
-{#            <li>{{ patient.last_name }}</li>#}
-{#            <li>{{ patient.phone }}</li>#}
-{#            <li>#}
-{#            <ul>#}
-{#                {% for d in patient.disease.all %}#}
-{#                <li>{{ d }}</li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#            </li>#}
-{#            <li>{{ patient.clinic }}</li>#}
-{#             <ul>#}
-{#                {% for d in patient.drug.all %}#}
-{#                <li>{{ d }}</li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#            <li>{{ patient.Pesel }}</li>#}
-{#            <li>{{ patient.my_history}}</li>#}
-{#            </ul>#}
-{#        {% endfor %}#}
-{#    </ul>#}
+{##}
+{##}
+{#<div class="container">#}
+{##}
+{#    <form>#}
+{##}
+{#        {% for patient in patient_list %}#}
+{#        <div class="row">#}
+{#         <div class ="text-center"> <label>Imię</label>#}
+{#             <text class="form-control"> {{ patient.first_name }}</text>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="form-group">#}
+{#          <label class="col-md-4 control-label">Nazwisko</label>#}
+{#          <div class="col-md-4">#}
+{#                <text class="form-control"> {{ patient.last_name }}</text>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="form-group">#}
+{#          <label class="col-md-4 control-label">Pesel</label>#}
+{#          <div class="col-md-4">#}
+{#               <text class="form-control"> {{ patient.Pesel }}</text>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="form-group">#}
+{#          <label class="col-md-4 control-label">Telefon</label>#}
+{#          <div class="col-md-4">#}
+{#                <text class="form-control"> {{ patient.phone }}</text>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="form-group">#}
+{#          <label class="col-md-4 control-label" >Przychodnia</label>#}
+{#          <div class="col-md-4">#}
+{#              <text class="form-control"> {{ patient.clinic }}</text>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="form-group">#}
+{#          <label class="col-md-4 control-label">Moja historia choroby</label>#}
+{#          <div class="col-md-4">#}
+{#              <textarea class="form-control ">{{ patient.my_history }}</textarea>#}
+{##}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="form-group">#}
+{#          <label class="col-md-4 control-label" >Na co choruję</label>#}
+{#          <div class="col-md-4">#}
+{#             {% for disease in patient.disease.all %}#}
+{#                <textarea class="form-control ">{{ disease }}</textarea>#}
+{#             {% endfor %}#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="form-group">#}
+{#          <label class="col-md-4 control-label" >Moje leki</label>#}
+{#          <div class="col-md-4">#}
+{#              {% for drug in patient.drug.all %}#}
+{#                  <textarea class="form-control ">{{ drug.name }} {{ drug.dosage }}</textarea>#}
+{#              {% endfor %}#}
+{#          </div>#}
+{#        </div>#}
+{#    </form>#}
+{#</div>#}
+{#    {% endfor %}#}
 {#{% endblock %}#}
+
+
+ {% for patient in patient_list %}
+        <ul>
+            <ul>
+            <li>{{ patient.first_name }}</li>
+            <li>{{ patient.last_name }}</li>
+            <li>{{ patient.phone }}</li>
+            <li>
+            <ul>choroby
+                {% for disease in patient.disease.all %}
+                <li>{{ disease }}</li>
+                {% endfor %}
+            </ul>
+            </li>
+            <li>{{ patient.clinic }}</li>
+             <ul>leki
+                {% for d in patient.drug.all %}
+                <li>{{ d }}</li>
+                {% endfor %}
+            </ul>
+            <li>{{ patient.Pesel }}</li>
+            <li>{{ patient.my_history}}</li>
+            </ul>
+        {% endfor %}
+    </ul>
+{% endblock %}
