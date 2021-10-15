@@ -1,8 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
-    <p>{{ disease.name }}<p>
-    <p>{{ disease.description }}</p>
+<br>
+    <br>
+    <div class="container">
+    <form>
+        <div class="d-inline-flex p-2 bd-highlight shadow text-center">
+            <div class="row">
+                <div class="shadow"></div>
+                <div class="container"><br><br>
+                    <ul>
+                        <li class="list-group-item me-md-4 justify-content-center">{{ disease.name }}</li>
+                    </ul>
+                    <br>
+                    <ul>
+                        <li class="list-group-item me-md-4">{{ disease.description }}</li>
+                    </ul>
+                </div>
+                <div class="col-sm"></div>
+            </div>
+        </div>
+    </form>
+    </div>
 
 {% endblock %}

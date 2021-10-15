@@ -6,6 +6,7 @@ from patientdiary.models import *
 
 class PatientModelForm(forms.ModelForm):
     class Meta:
+        model = Patient
         fields = '__all__'
         labels = {
             'first_name': 'imie',
@@ -17,11 +18,19 @@ class PatientModelForm(forms.ModelForm):
             'drug': 'lek',
             'clinic': 'przychodnia'
         }
-        widgets = {
-            'disease': forms.CheckboxSelectMultiple,
-            'drug': forms.CheckboxSelectMultiple,
-            'clinic': forms.ModelChoiceField(queryset=Clinic.objects.all(), to_field_name='clinic')
-        }
+
+
+class PatientUpdate(forms.ModelForm):
+    class Meta:
+        fields = ['first_name', 'last_name', 'phone', 'clinic', 'my_history']
+        model = Patient
+        labels = {
+            'first_name': 'imie',
+            'last_name': 'nazwisko',
+            'phone': 'telefon',
+            'my_history': 'moja historia',
+            'clinic': 'przychodnia'}
+
 
 
 class DiseaseModelForm(forms.ModelForm):
@@ -54,9 +63,6 @@ class DrugsModelForm(forms.ModelForm):
             'action': 'działanie',
             'substances': 'substancja'
         }
-        # widgets = {
-        #     'substances': forms.CheckboxSelectMultiple
-        # }
 
 
 class GroupModelForm(forms.ModelForm):
@@ -68,9 +74,6 @@ class GroupModelForm(forms.ModelForm):
             'name': 'nazwa grupy',
             'symbol': 'symbol'
         }
-        # widgets = {
-        #     'parent': forms.ModelChoiceField(queryset=Group.objects.all(), to_field_name='parent')
-        # }
 
 
 class ClinicModelForm(forms.ModelForm):
