@@ -1,10 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import DetailView, ListView, DeleteView, UpdateView, CreateView
 
 from accounts.models import CustomUser
-from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm, PatientUpdate
+from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm
 from patientdiary.models import Patient, Drugs, Doctor, Disease, Clinic, Pharmacy
 # Create your views here.
 
@@ -16,37 +16,42 @@ class IndexView(View):
         return response
 
 
-class PatientListView(ListView):
+class PatientListView(PermissionRequiredMixin, ListView):
+    permission_required = 'patientdiary.view_patient'
     model = Patient
     template_name = 'patient_view.html'
 
 
-class DrugsListView(ListView):
+class DrugsListView(PermissionRequiredMixin, ListView):
+    permission_required = 'patientdiary.view_drugs'
     model = Drugs
     template_name = 'drugs_view.html'
 
 
-class DiseasesListView(ListView):
+class DiseasesListView(PermissionRequiredMixin, ListView):
+    permission_required = 'patientdiary.view_disease'
     model = Disease
     template_name = 'diseases_view.html'
 
 
-class AddDrugView(CreateView):
+class AddDrugView(PermissionRequiredMixin, CreateView):
+    permission_required = 'patientdiary.add_drugs'
     model = Drugs
     template_name = 'form.html'
     form_class = DrugsModelForm
     success_url = "/drugs/"
 
 
-class AddDiseaseView(CreateView):
+class AddDiseaseView(PermissionRequiredMixin, CreateView):
+    permission_required = 'patientdiary.add_disease'
     model = Disease
     template_name = 'form.html'
     form_class = DiseaseModelForm
     success_url = "/diseases/"
 
 
-class ContactsListView(ListView):
-
+class ContactsListView(PermissionRequiredMixin, ListView):
+    permission_required = 'patientdiary.view_pharmacy'
     model = CustomUser
     template_name = 'contacts.html'
 
@@ -58,7 +63,8 @@ class ContactsListView(ListView):
         return context
 
 
-class UpdateDiseaseView(UpdateView):
+class UpdateDiseaseView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'patientdiary.change_disease'
     model = Disease
     template_name = 'form.html'
     form_class = DiseaseModelForm
@@ -66,39 +72,44 @@ class UpdateDiseaseView(UpdateView):
     success_url = "/diseases/"
 
 
-class UpdatePatientView(UpdateView):
-    form_class = PatientUpdate
-    model = Patient
+class UpdatePatientView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'patientdiary.change_patient'
+    form_class = PatientModelForm
     template_name = 'form.html'
     success_url = "/patient/"
 
 
-class UpdateDrugView(UpdateView):
+class UpdateDrugView(PermissionRequiredMixin, UpdateView):
+    # permission_required = 'patientdiary.
     model = Drugs
     template_name = 'form.html'
     form_class = DrugsModelForm
     success_url = "/drugs/"
 
 
-class DeleteDiseaseView(DeleteView):
+class DeleteDiseaseView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'patientdiary.change_drugs'
     model = Disease
     template_name = 'form.html'
     success_url = "/diseases/"
 
 
-class DeleteDrugView(DeleteView):
+class DeleteDrugView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'patientdiary.delete_drugs'
     model = Drugs
     template_name = 'form.html'
     success_url = "/drugs/"
 
 
-class DiseaseDetailView(DetailView):
+class DiseaseDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'patientdiary.delete_disease'
     model = Disease
     template_name = 'disease_detail_view.html'
     fields = '__all__'
 
 
-class DrugDetailView(DetailView):
+class DrugDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'patientdiary.view_drugs'
     model = Drugs
     template_name = 'drug_detail_view.html'
     fields = '__all__'

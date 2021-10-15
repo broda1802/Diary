@@ -6,22 +6,6 @@ from patientdiary.models import *
 
 class PatientModelForm(forms.ModelForm):
     class Meta:
-        model = Patient
-        fields = '__all__'
-        labels = {
-            'first_name': 'imie',
-            'last_name': 'nazwisko',
-            'Pesel': 'Pesel',
-            'phone': 'telefon',
-            'my_history': 'moja historia',
-            'disease': 'choroba',
-            'drug': 'lek',
-            'clinic': 'przychodnia'
-        }
-
-
-class PatientUpdate(forms.ModelForm):
-    class Meta:
         fields = ['first_name', 'last_name', 'phone', 'clinic', 'my_history']
         model = Patient
         labels = {
@@ -29,8 +13,8 @@ class PatientUpdate(forms.ModelForm):
             'last_name': 'nazwisko',
             'phone': 'telefon',
             'my_history': 'moja historia',
-            'clinic': 'przychodnia'}
-
+            'clinic': 'przychodnia'
+        }
 
 
 class DiseaseModelForm(forms.ModelForm):
