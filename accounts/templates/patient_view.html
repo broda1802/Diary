@@ -1,100 +1,60 @@
 {% extends "base.html" %}
 {% block content %}
-
-{##}
-{##}
-{#<div class="container">#}
-{##}
-{#    <form>#}
-{##}
-{#        {% for patient in patient_list %}#}
-{#        <div class="row">#}
-{#         <div class ="text-center"> <label>Imię</label>#}
-{#             <text class="form-control"> {{ patient.first_name }}</text>#}
-{#          </div>#}
-{#        </div>#}
-{##}
-{#        <div class="form-group">#}
-{#          <label class="col-md-4 control-label">Nazwisko</label>#}
-{#          <div class="col-md-4">#}
-{#                <text class="form-control"> {{ patient.last_name }}</text>#}
-{#          </div>#}
-{#        </div>#}
-{##}
-{#        <div class="form-group">#}
-{#          <label class="col-md-4 control-label">Pesel</label>#}
-{#          <div class="col-md-4">#}
-{#               <text class="form-control"> {{ patient.Pesel }}</text>#}
-{#          </div>#}
-{#        </div>#}
-{##}
-{#        <div class="form-group">#}
-{#          <label class="col-md-4 control-label">Telefon</label>#}
-{#          <div class="col-md-4">#}
-{#                <text class="form-control"> {{ patient.phone }}</text>#}
-{#          </div>#}
-{#        </div>#}
-{##}
-{#        <div class="form-group">#}
-{#          <label class="col-md-4 control-label" >Przychodnia</label>#}
-{#          <div class="col-md-4">#}
-{#              <text class="form-control"> {{ patient.clinic }}</text>#}
-{#          </div>#}
-{#        </div>#}
-{##}
-{#        <div class="form-group">#}
-{#          <label class="col-md-4 control-label">Moja historia choroby</label>#}
-{#          <div class="col-md-4">#}
-{#              <textarea class="form-control ">{{ patient.my_history }}</textarea>#}
-{##}
-{#          </div>#}
-{#        </div>#}
-{##}
-{#        <div class="form-group">#}
-{#          <label class="col-md-4 control-label" >Na co choruję</label>#}
-{#          <div class="col-md-4">#}
-{#             {% for disease in patient.disease.all %}#}
-{#                <textarea class="form-control ">{{ disease }}</textarea>#}
-{#             {% endfor %}#}
-{#          </div>#}
-{#        </div>#}
-{##}
-{#        <div class="form-group">#}
-{#          <label class="col-md-4 control-label" >Moje leki</label>#}
-{#          <div class="col-md-4">#}
-{#              {% for drug in patient.drug.all %}#}
-{#                  <textarea class="form-control ">{{ drug.name }} {{ drug.dosage }}</textarea>#}
-{#              {% endfor %}#}
-{#          </div>#}
-{#        </div>#}
-{#    </form>#}
-{#</div>#}
-{#    {% endfor %}#}
-{#{% endblock %}#}
-
-
- {% for patient in patient_list %}
-        <ul>
-            <ul>
-            <li>{{ patient.first_name }}</li>
-            <li>{{ patient.last_name }}</li>
-            <li>{{ patient.phone }}</li>
-            <li>
-            <ul>choroby
-                {% for disease in patient.disease.all %}
-                <li>{{ disease }}</li>
-                {% endfor %}
-            </ul>
-            </li>
-            <li>{{ patient.clinic }}</li>
-             <ul>leki
-                {% for d in patient.drug.all %}
-                <li>{{ d }}</li>
-                {% endfor %}
-            </ul>
-            <li>{{ patient.Pesel }}</li>
-            <li>{{ patient.my_history}}</li>
-            </ul>
-        {% endfor %}
-    </ul>
+    <div class="d-flex justify-content-center">
+        <div class="bg-light p-0 rounded-3 shadow-lg mt-xl-3" style="--bs-bg-opacity: .7;">
+            <div class="card-body text-center">
+                 {% for patient in patient_list %}
+                     <div class="container text-center">
+                     <a href="{% url 'patient_update_view' patient.pk %}"><br>
+                         <button type="button" class="btn btn-secondary">Edytuj dane</button></a><br>
+                         <br>
+                         <ul>
+                             <input class="me-md-auto" type="text"  value="Imię: {{ patient.first_name }}" readonly>
+                             <div><br></div>
+                             <input class="me-md-auto" type="text"  value="Nazwisko: {{ patient.last_name }}" readonly>
+                             <div><br></div>
+                             <input class="me-md-auto" type="text"  value="Telefon: {{ patient.phone }}" readonly>
+                             <div><br></div>
+                             <input class="me-md-auto" type="text"  value="Pesel: {{ patient.Pesel }}" readonly>
+                             <div><br></div>
+                             <input class="me-md-auto" type="text" value="Przychodnia: {{ patient.clinic }}" readonly>
+                             <div><br></div>
+                             <ul class="row-cols-2">
+                                 <input type="text" value="Na co choruję:" readonly>
+                                 {% for disease in patient.disease.all %}
+                                     <input class="me-md-auto" type="text" value="{{ disease }}" readonly>
+                                 {% endfor %}
+                             </ul>
+                             <div><br></div>
+                             <ul class="row-cols-2" >
+                                 <input type="text" value="Moje leki:" readonly>
+                                 {% for drug in patient.drug.all %}
+                                     <input class="me-md-auto" type="text" value="{{ drug }}" readonly>
+                                 {% endfor %}
+                                 <div><br></div>
+                                 <textarea class="container" readonly style="width: 30%; height: 150px; ">{{ patient.my_history}}</textarea>
+                             </ul>
+                     </div>
+                 {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+Mateusz Szcześniak, [15.10.21 09:23]
+<div class="d-flex justify-content-center">
+    <div class="bg-light p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-5" style="--bs-bg-opacity: .7;">
+        <div class="card-body text-center">
+            CONTENT
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-center">
+    <div class="bg-light p-0 rounded-3 shadow-lg mt-xl-3" style="--bs-bg-opacity: .7;">
+        <div class="card-body text-center">
+            CONTENT
+        </div>
+    </div>
+</div>

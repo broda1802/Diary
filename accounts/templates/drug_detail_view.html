@@ -11,38 +11,34 @@
 {% block content %}
 <br>
     <br>
-    <div class="container">
-    <form>
-        <div class=" shadow text-center">
-            <div class="row">
+    <div class="container-fluid">
+
                 <div class="shadow"></div>
-                <div class="container"><br><br
+                <div class="container"><br>
                     <ul>
-                        <li class="list-group-item me-md-4 justify-content-center">{{ drugs.name}}</li>
+                        <li class="list-group-item me-md-4 ">Nazwa leku:{{ drugs.name}}</li>
                     </ul>
                     <br>
                     <ul>
-                        <li class="list-group-item me-md-4">{{ drugs.dosage }}</li>
+                        <li class="list-group-item me-md-4">Dawka {{ drugs.dosage }} mg</li>
                     </ul>
                     <br>
                     <ul>
                         {% for substance in drugs.substances.all%}
-                        <li class="list-group-item me-md-4">{{ substance}}</li>
+                        <li class="list-group-item me-md-4">Substancja:{{ substance}}</li>
                         {% endfor %}
                     </ul>
                     <br>
                     <ul>
-                        <li class="list-group-item me-md-4">{{ drugs.leaflet }}</li>
+{#                       <li class="list-group-item me-md-4">{{ drugs.leaflet }}</li>#}
+                        <textarea class="container-fluid row-cols-2" readonly style=" width: 98%; height: 200px;">{{ drugs.leaflet }}</textarea>
                     </ul>
                     <br>
                     <ul>
-                        <li class="list-group-item me-md-4">{{ drugs.action }}</li>
+                        <li class="list-group-item me-md-4">Działanie: {{ drugs.action }}</li>
                     </ul>
                 </div>
                 <div class="col-sm"></div>
-            </div>
-        </div>
-    </form>
     </div>
 
 {% endblock %}

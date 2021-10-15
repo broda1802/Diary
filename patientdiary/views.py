@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import DetailView, ListView, DeleteView, UpdateView, CreateView
 
 from accounts.models import CustomUser
-from patientdiary.forms import DiseaseModelForm, DrugsModelForm
+from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm, PatientUpdate
 from patientdiary.models import Patient, Drugs, Doctor, Disease, Clinic, Pharmacy
 # Create your views here.
 
@@ -62,7 +62,15 @@ class UpdateDiseaseView(UpdateView):
     model = Disease
     template_name = 'form.html'
     form_class = DiseaseModelForm
+
     success_url = "/diseases/"
+
+
+class UpdatePatientView(UpdateView):
+    form_class = PatientUpdate
+    model = Patient
+    template_name = 'form.html'
+    success_url = "/patient/"
 
 
 class UpdateDrugView(UpdateView):
