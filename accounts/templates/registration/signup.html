@@ -110,9 +110,11 @@
 				</div>
 
 				<div class="mt-4">
+
 					<div class="d-flex justify-content-center links">
 						Masz już konto? <a href="{% url 'login' %}" class="ml-2">Zaloguj się</a>
 					</div>
+                    {{ form.errors }}
 				</div>
 			</div>
 		</div>
