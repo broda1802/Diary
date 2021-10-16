@@ -80,7 +80,7 @@ class UpdatePatientView(PermissionRequiredMixin, UpdateView):
 
 
 class UpdateDrugView(PermissionRequiredMixin, UpdateView):
-    # permission_required = 'patientdiary.
+    permission_required = 'patientdiary.change_drugs'
     model = Drugs
     template_name = 'form.html'
     form_class = DrugsModelForm

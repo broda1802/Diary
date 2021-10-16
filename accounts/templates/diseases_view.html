@@ -15,7 +15,7 @@ table{
 
    <div class="container text-center">
           <a href="{% url 'disease_add_view' %}">
-      <button type="button" class="btn btn-secondary">Dodaj chorobę   </button></a
+      <button type="button" class="btn-secondary btn-sm disabled" tabindex="-1" role="button" aria-disabled="true">Dodaj chorobę   </button></a
     </div>
 
 <table class="table " >
@@ -29,9 +29,9 @@ table{
         <th scope></th>
         <td>
         <a href="{% url 'disease_update_view' disease.pk %}">
-            <button type="button" class="btn btn-primary">Edytuj</button></a>
+            <button type="button" class="btn btn-outline-info btn-sm">Edytuj</button></a>
         <a href="{% url 'disease_delete_view' disease.pk %}">
-            <button type="button" class="btn btn-danger">Usuń</button></a>
+            <button type="button" class="btn btn-outline-danger btn-sm">Usuń</button></a>
         </td>
         </th>
 

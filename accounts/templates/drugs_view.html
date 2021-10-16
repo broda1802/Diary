@@ -16,7 +16,7 @@ table{
 
     <div class="container text-center">
          <a href="{% url 'drug_add_view' %}">
-            <button type="button" class="btn btn-secondary">Dodaj lek   </button></a>
+            <button type="button" class="btn-secondary btn-sm disabled" tabindex="-1" role="button" aria-disabled="true">Dodaj lek   </button></a>
     </div>
 <br>
 
@@ -43,10 +43,10 @@ table{
       <td>{{ drug}} </td>
          {% endfor %}
       <td><a href="{% url 'drug_update_view' drug.pk %}">
-            <button type="button" class="btn btn-primary">Edytuj</button></a>
+            <button type="button" class="btn btn-outline-info btn-sm">Edytuj</button></a>
 
         <a href="{% url 'drug_delete_view' drug.pk %}">
-            <button type="button" class="btn btn-danger">Usuń</button></a>
+            <button type="button" class="btn btn-outline-danger btn-sm">Usuń</button></a>
 
       </td>
     </tr>

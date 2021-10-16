@@ -22,8 +22,12 @@ class DiseaseModelForm(forms.ModelForm):
         model = Disease
         fields = '__all__'
         labels = {
-            'name': 'nazwa',
-            'description': 'opis'
+            'name': 'Nazwa',
+            'description': 'Opis'
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
 
@@ -36,16 +40,24 @@ class SubstanceModelForm(forms.ModelForm):
         }
 
 
+
 class DrugsModelForm(forms.ModelForm):
     class Meta:
         model = Drugs
         fields = '__all__'
         labels = {
-            'name': 'nazwa',
-            'leaflet': 'ulotka',
-            'dosage': 'dawka',
-            'action': 'działanie',
-            'substances': 'substancja'
+            'name': 'Nazwa',
+            'leaflet': 'Ulotka',
+            'dosage': 'Dawka',
+            'action': 'Działanie',
+            'substances': 'Substancja'
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'leaflet': forms.Textarea(attrs={'class': 'form-control'}),
+            'dosage': forms.NumberInput(attrs={'class': 'form-control'}),
+            'action': forms.TextInput(attrs={'class': 'form-control'}),
+            'substances': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
 
 

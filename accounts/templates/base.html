@@ -43,6 +43,9 @@
         </li>
       </ul>
     </div>
+   {% if user.is_authenticated %}
+      <div> Cześć {{ user }} {{ datetime }} </div>
+  {% endif %}
   </div>
 </nav>
   <body id="bg" style="background-image: url('{% static "accounts/images/mainpage.jpg" %}');">
