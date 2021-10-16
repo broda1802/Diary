@@ -75,6 +75,7 @@ class UpdateDiseaseView(PermissionRequiredMixin, UpdateView):
 class UpdatePatientView(PermissionRequiredMixin, UpdateView):
     permission_required = 'patientdiary.change_patient'
     form_class = PatientModelForm
+    model = Patient
     template_name = 'form.html'
     success_url = "/patient/"
 

@@ -9,11 +9,18 @@ class PatientModelForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'phone', 'clinic', 'my_history']
         model = Patient
         labels = {
-            'first_name': 'imie',
-            'last_name': 'nazwisko',
-            'phone': 'telefon',
-            'my_history': 'moja historia',
-            'clinic': 'przychodnia'
+            'first_name': 'Imię',
+            'last_name': 'Nazwisko',
+            'phone': 'Numer telefonu',
+            'my_history': 'Moja historia chorób',
+            'clinic': 'Moja przychodnia'
+        }
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'my_history': forms.Textarea(attrs={'class': 'form-control'}),
+            'clinic': forms.Select(attrs={'class': 'form-control'})
         }
 
 
@@ -38,7 +45,6 @@ class SubstanceModelForm(forms.ModelForm):
         labels = {
             'substance_name': 'nazwa substancji'
         }
-
 
 
 class DrugsModelForm(forms.ModelForm):
