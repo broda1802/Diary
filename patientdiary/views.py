@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import DetailView, ListView, DeleteView, UpdateView, CreateView
@@ -10,7 +10,6 @@ from patientdiary.models import Patient, Drugs, Doctor, Disease, Clinic, Pharmac
 
 
 class IndexView(View):
-
     def get(self, request):
         response = render(request, 'base.html', )
         return response
@@ -114,4 +113,5 @@ class DrugDetailView(PermissionRequiredMixin, DetailView):
     model = Drugs
     template_name = 'drug_detail_view.html'
     fields = '__all__'
+
 
