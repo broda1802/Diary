@@ -10,7 +10,6 @@ from patientdiary.models import Patient, Drugs, Doctor, Disease, Clinic, Pharmac
 
 
 class IndexView(View):
-
     def get(self, request):
         response = render(request, 'base.html', )
         return response
@@ -114,4 +113,5 @@ class DrugDetailView(PermissionRequiredMixin, DetailView):
     model = Drugs
     template_name = 'drug_detail_view.html'
     fields = '__all__'
+
 

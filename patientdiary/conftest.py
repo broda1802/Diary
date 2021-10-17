@@ -1,13 +1,10 @@
 import pytest
 from django.contrib.auth.models import User
 
+from accounts.models import CustomUser
 from patientdiary.models import Patient, Drugs, Disease
 
 
 @pytest.fixture
-def patients():
-    lst = []
-    for x in range(10):
-        lst.append(Patient.objects.create(first_name=x, last_name=x))
-    return lst
-
+def user():
+    return CustomUser.objects.create(username='abc', password='xyz')
