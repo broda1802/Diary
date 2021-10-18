@@ -88,6 +88,13 @@ class ClinicModelForm(forms.ModelForm):
             'street': 'Ulica',
             'phone': 'Numer telefonu'
         }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'street': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'})
+
+        }
 
 
 class PharmacyModelForm(forms.ModelForm):
@@ -101,6 +108,13 @@ class PharmacyModelForm(forms.ModelForm):
             'phone': 'Numer telefonu',
             'opening_hours': 'Godziny otwarcia'
         }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'street': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'opening_hours': forms.TextInput(attrs={'class': 'form-control'})
+        }
 
 
 class DoctorModelForm(forms.ModelForm):
@@ -111,6 +125,11 @@ class DoctorModelForm(forms.ModelForm):
             'first_name': 'Imię',
             'last_name': 'Nazwisko',
             'medical_specialization': 'Specjalizacja'
+        }
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'medical_specialization': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
