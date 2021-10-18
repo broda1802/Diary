@@ -2,7 +2,7 @@ import pytest
 from django.test import Client
 from django.urls import reverse
 
-from accounts.models import CustomUser
+from accounts.models import Patient
 
 
 def test_login():
@@ -40,7 +40,7 @@ def test_signup_post():
     assert response.status_code == 302
     del a['password1']
     del a['password2']
-    CustomUser.objects.get(**a)
+    Patient.objects.get(**a)
 
 
 @pytest.mark.django_db

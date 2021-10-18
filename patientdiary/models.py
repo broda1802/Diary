@@ -3,23 +3,6 @@ from django.db import models
 # Create your models here.
 from django.urls import reverse
 
-from accounts.models import CustomUser
-
-
-class Patient(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    Pesel = models.IntegerField(unique=True)
-    phone = models.IntegerField()
-    my_history = models.TextField()
-    disease = models.ManyToManyField('Disease')
-    drug = models.ManyToManyField('Drugs')
-    clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.first_name + " " + self.last_name
-
 
 class Disease(models.Model):
     name = models.CharField(max_length=128)

@@ -1,7 +1,7 @@
 import pytest
 from django.contrib.auth.models import User, Permission
-from accounts.models import CustomUser
-from patientdiary.models import Patient, Drugs, Disease, Substance, Group, Clinic, Pharmacy, Doctor
+from accounts.models import Patient
+from patientdiary.models import Drugs, Disease, Substance, Group, Clinic, Pharmacy, Doctor
 from faker import Faker
 
 faker = Faker("pl_PL")
@@ -9,7 +9,7 @@ faker = Faker("pl_PL")
 
 @pytest.fixture
 def user():
-    return CustomUser.objects.create(username='abc', password='laseczek1')
+    return Patient.objects.create(username='abc', password='laseczek1')
 
 
 @pytest.fixture

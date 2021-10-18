@@ -1,12 +1,14 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.http import Http404
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, ListView, DeleteView, UpdateView, CreateView
 
-from accounts.models import CustomUser
+from accounts.models import Patient
 from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm, ClinicModelForm, PharmacyModelForm, \
     DoctorModelForm
-from patientdiary.models import Patient, Drugs, Doctor, Disease, Clinic, Pharmacy
+from patientdiary.models import Drugs, Doctor, Disease, Clinic, Pharmacy
 # Create your views here.
 
 
@@ -22,7 +24,7 @@ class PatientDetailView(LoginRequiredMixin, DetailView):
 
 
 class ContactsListView(LoginRequiredMixin, ListView):
-    model = CustomUser
+    model = Patient
     template_name = 'contacts.html'
 
     def get_context_data(self, **kwargs):
@@ -37,7 +39,15 @@ class UpdatePatientView(LoginRequiredMixin, UpdateView):
     form_class = PatientModelForm
     model = Patient
     template_name = 'form.html'
-    success_url = "/patient/"
+
+    def get_success_url(self):
+        return reverse_lazy('patient_view', kwargs={'pk': self.object.pk})
+
+    def test_func(self):
+        if self.request.user.pk == int(self.kwargs['pk']):
+            return True
+        else:
+            raise Http404
 
 
 class DiseasesListView(LoginRequiredMixin, ListView):

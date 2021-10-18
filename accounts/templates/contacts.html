@@ -60,12 +60,12 @@
               <a>Ulica: {{clinic.street }} </a><br>
               <a>Telefon {{clinic.phone }} </a>
           </ul>
-{#              <a href="{% url 'clinic_add_view'%}">#}
-{#                <button type="button" class="btn btn-outline-info btn-sm">Dodaj</button></a>#}
-{#              <a href="{% url 'clinic_delete_view {{ clinic.pk }}'%}">#}
-{#                <button type="button" class="btn btn-outline-danger btn-sm">Usuń</button></a>#}
-{#              <a href="{% url 'clinic_update_view'%}{{ clinic.pk }}">#}
-{#                <button type="button" class="btn btn-outline-secondary btn-sm">Edytuj</button></a>#}
+              <a href="{% url 'clinic_add_view'%}">
+                <button type="button" class="btn btn-outline-info btn-sm">Dodaj</button></a>
+              <a href="{% url 'clinic_delete_view' clinic.pk %}">
+                <button type="button" class="btn btn-outline-danger btn-sm">Usuń</button></a>
+              <a href="{% url 'clinic_update_view' clinic.pk%}">
+                <button type="button" class="btn btn-outline-secondary btn-sm">Edytuj</button></a>
       </div>
     </div>
       {% endfor %}
