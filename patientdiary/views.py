@@ -23,18 +23,6 @@ class PatientDetailView(LoginRequiredMixin, DetailView):
     template_name = 'patient_view.html'
 
 
-class ContactsListView(LoginRequiredMixin, ListView):
-    model = Patient
-    template_name = 'contacts.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['pharmacies'] = Pharmacy.objects.all()
-        context['clinics'] = Clinic.objects.all()
-        context['doctors'] = Doctor.objects.all()
-        return context
-
-
 class UpdatePatientView(LoginRequiredMixin, UpdateView):
     form_class = PatientModelForm
     model = Patient
@@ -48,6 +36,18 @@ class UpdatePatientView(LoginRequiredMixin, UpdateView):
             return True
         else:
             raise Http404
+
+
+class ContactsListView(LoginRequiredMixin, ListView):
+    model = Patient
+    template_name = 'contacts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pharmacies'] = Pharmacy.objects.all()
+        context['clinics'] = Clinic.objects.all()
+        context['doctors'] = Doctor.objects.all()
+        return context
 
 
 class DiseasesListView(LoginRequiredMixin, ListView):
@@ -112,6 +112,7 @@ class DeleteDrugView(LoginRequiredMixin, DeleteView):
     template_name = 'form.html'
     success_url = "/drugs/"
     login_url = 'login'
+
 
 class AddClinicView(LoginRequiredMixin, CreateView):
     model = Clinic
