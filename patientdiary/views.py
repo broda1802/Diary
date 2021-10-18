@@ -1,10 +1,11 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import DetailView, ListView, DeleteView, UpdateView, CreateView
 
 from accounts.models import CustomUser
-from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm
+from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm, ClinicModelForm, PharmacyModelForm, \
+    DoctorModelForm
 from patientdiary.models import Patient, Drugs, Doctor, Disease, Clinic, Pharmacy
 # Create your views here.
 
@@ -15,42 +16,12 @@ class IndexView(View):
         return response
 
 
-class PatientListView(PermissionRequiredMixin, ListView):
-    permission_required = 'patientdiary.view_patient'
+class PatientDetailView(LoginRequiredMixin, DetailView):
     model = Patient
     template_name = 'patient_view.html'
 
 
-class DrugsListView(PermissionRequiredMixin, ListView):
-    permission_required = 'patientdiary.view_drugs'
-    model = Drugs
-    template_name = 'drugs_view.html'
-
-
-class DiseasesListView(PermissionRequiredMixin, ListView):
-    permission_required = 'patientdiary.view_disease'
-    model = Disease
-    template_name = 'diseases_view.html'
-
-
-class AddDrugView(PermissionRequiredMixin, CreateView):
-    permission_required = 'patientdiary.add_drugs'
-    model = Drugs
-    template_name = 'form.html'
-    form_class = DrugsModelForm
-    success_url = "/drugs/"
-
-
-class AddDiseaseView(PermissionRequiredMixin, CreateView):
-    permission_required = 'patientdiary.add_disease'
-    model = Disease
-    template_name = 'form.html'
-    form_class = DiseaseModelForm
-    success_url = "/diseases/"
-
-
-class ContactsListView(PermissionRequiredMixin, ListView):
-    permission_required = 'patientdiary.view_pharmacy'
+class ContactsListView(LoginRequiredMixin, ListView):
     model = CustomUser
     template_name = 'contacts.html'
 
@@ -62,56 +33,136 @@ class ContactsListView(PermissionRequiredMixin, ListView):
         return context
 
 
-class UpdateDiseaseView(PermissionRequiredMixin, UpdateView):
-    permission_required = 'patientdiary.change_disease'
-    model = Disease
-    template_name = 'form.html'
-    form_class = DiseaseModelForm
-
-    success_url = "/diseases/"
-
-
-class UpdatePatientView(PermissionRequiredMixin, UpdateView):
-    permission_required = 'patientdiary.change_patient'
+class UpdatePatientView(LoginRequiredMixin, UpdateView):
     form_class = PatientModelForm
     model = Patient
     template_name = 'form.html'
     success_url = "/patient/"
 
 
-class UpdateDrugView(PermissionRequiredMixin, UpdateView):
-    permission_required = 'patientdiary.change_drugs'
+class DiseasesListView(LoginRequiredMixin, ListView):
+    model = Disease
+    template_name = 'diseases_view.html'
+
+
+class AddDiseaseView(LoginRequiredMixin, CreateView):
+    model = Disease
+    template_name = 'form.html'
+    form_class = DiseaseModelForm
+    success_url = "/diseases/"
+
+
+class DiseaseDetailView(LoginRequiredMixin, DetailView):
+    model = Disease
+    template_name = 'disease_detail_view.html'
+    fields = '__all__'
+
+
+class UpdateDiseaseView(LoginRequiredMixin, UpdateView):
+    model = Disease
+    template_name = 'form.html'
+    form_class = DiseaseModelForm
+    success_url = "/diseases/"
+
+
+class DeleteDiseaseView(LoginRequiredMixin, DeleteView):
+    model = Disease
+    template_name = 'form.html'
+    success_url = "/diseases/"
+
+
+class DrugsListView(LoginRequiredMixin, ListView):
+    model = Drugs
+    template_name = 'drugs_view.html'
+    login_url = 'login'
+
+
+class AddDrugView(LoginRequiredMixin, CreateView):
     model = Drugs
     template_name = 'form.html'
     form_class = DrugsModelForm
     success_url = "/drugs/"
 
 
-class DeleteDiseaseView(PermissionRequiredMixin, DeleteView):
-    permission_required = 'patientdiary.change_drugs'
-    model = Disease
-    template_name = 'form.html'
-    success_url = "/diseases/"
-
-
-class DeleteDrugView(PermissionRequiredMixin, DeleteView):
-    permission_required = 'patientdiary.delete_drugs'
-    model = Drugs
-    template_name = 'form.html'
-    success_url = "/drugs/"
-
-
-class DiseaseDetailView(PermissionRequiredMixin, DetailView):
-    permission_required = 'patientdiary.delete_disease'
-    model = Disease
-    template_name = 'disease_detail_view.html'
-    fields = '__all__'
-
-
-class DrugDetailView(PermissionRequiredMixin, DetailView):
-    permission_required = 'patientdiary.view_drugs'
+class DrugDetailView(LoginRequiredMixin, DetailView):
     model = Drugs
     template_name = 'drug_detail_view.html'
     fields = '__all__'
+
+
+class UpdateDrugView(LoginRequiredMixin, UpdateView):
+    model = Drugs
+    template_name = 'form.html'
+    form_class = DrugsModelForm
+    success_url = "/drugs/"
+
+
+class DeleteDrugView(LoginRequiredMixin, DeleteView):
+    model = Drugs
+    template_name = 'form.html'
+    success_url = "/drugs/"
+    login_url = 'login'
+
+class AddClinicView(LoginRequiredMixin, CreateView):
+    model = Clinic
+    template_name = 'form.html'
+    form_class = ClinicModelForm
+    success_url = "/contacts"
+
+
+class UpdateClinicView(LoginRequiredMixin, UpdateView):
+    model = Clinic
+    template_name = 'form.html'
+    form_class = ClinicModelForm
+    success_url = "/contacts"
+
+
+class DeleteClinicView(LoginRequiredMixin, DeleteView):
+    model = Clinic
+    template_name = 'form.html'
+    success_url = "/contacts"
+    login_url = 'login'
+
+
+class AddPharmacyView(LoginRequiredMixin, CreateView):
+    model = Pharmacy
+    template_name = 'form.html'
+    form_class = PharmacyModelForm
+    success_url = "/contacts"
+
+
+class UpdatePharmacyView(LoginRequiredMixin, UpdateView):
+    model = Pharmacy
+    template_name = 'form.html'
+    form_class = PharmacyModelForm
+    success_url = "/contacts"
+
+
+class DeletePharmacyView(LoginRequiredMixin, DeleteView):
+    model = Pharmacy
+    template_name = 'form.html'
+    success_url = "/contacts"
+    login_url = 'login'
+
+
+class AddDoctorView(LoginRequiredMixin, CreateView):
+    model = Doctor
+    template_name = 'form.html'
+    form_class = DoctorModelForm
+    success_url = "/contacts"
+
+
+class UpdateDoctorView(LoginRequiredMixin, UpdateView):
+    model = Doctor
+    template_name = 'form.html'
+    form_class = DoctorModelForm
+    success_url = "/contacts"
+
+
+class DeleteDoctorView(LoginRequiredMixin, DeleteView):
+    model = Doctor
+    template_name = 'form.html'
+    success_url = "/contacts"
+    login_url = 'login'
 
 

@@ -83,10 +83,10 @@ class ClinicModelForm(forms.ModelForm):
         model = Clinic
         fields = '__all__'
         labels = {
-            'name': 'nazwa',
-            'city': 'miasto',
-            'street': 'ulica',
-            'phone': 'numer telefonu'
+            'name': 'Nazwa',
+            'city': 'Miasto',
+            'street': 'Ulica',
+            'phone': 'Numer telefonu'
         }
 
 
@@ -95,11 +95,11 @@ class PharmacyModelForm(forms.ModelForm):
         model = Pharmacy
         fields = '__all__'
         labels = {
-            'name': 'nazwa',
-            'city': 'miasto',
-            'street': 'ulica',
-            'phone': 'numer telefonu',
-            'opening_hours': 'godziny otwarcia'
+            'name': 'Nazwa',
+            'city': 'Miasto',
+            'street': 'Ulica',
+            'phone': 'Numer telefonu',
+            'opening_hours': 'Godziny otwarcia'
         }
 
 
@@ -108,9 +108,9 @@ class DoctorModelForm(forms.ModelForm):
         model = Doctor
         fields = '__all__'
         labels = {
-            'first_name': 'imie',
-            'last_name': 'imie',
-            'medical_specialization': 'specjalizacja'
+            'first_name': 'Imię',
+            'last_name': 'Nazwisko',
+            'medical_specialization': 'Specjalizacja'
         }
 
 
