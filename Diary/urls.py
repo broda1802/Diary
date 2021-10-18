@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('patient/', views.PatientDetailView.as_view(), name='patient_view'),
+    path('patient/<int:pk>/', views.PatientDetailView.as_view(), name='patient_view'),
     path('update_patient/<int:pk>/', views.UpdatePatientView.as_view(), name='patient_update_view'),
     path('drugs/', views.DrugsListView.as_view(), name='drugs_view'),
     path('drugs/<int:pk>/', views.DrugDetailView.as_view(), name='drug_detail_view'),

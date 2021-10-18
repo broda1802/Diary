@@ -3,7 +3,6 @@
     <div class="d-flex justify-content-center">
         <div class="bg-light p-0 rounded-3 shadow-lg mt-xl-3" style="--bs-bg-opacity: .7;">
             <div class="card-body text-center">
-                 {% for patient in patient_list %}
                      <div class="container text-center">
                      <a href="{% url 'patient_update_view' patient.pk %}"><br>
                          <button type="button" class="btn btn-secondary">Edytuj dane</button></a><br>
@@ -35,7 +34,6 @@
                                  <textarea class="container" readonly style="width: 30%; height: 150px; ">{{ patient.my_history}}</textarea>
                              </ul>
                      </div>
-                 {% endfor %}
             </div>
         </div>
     </div>
