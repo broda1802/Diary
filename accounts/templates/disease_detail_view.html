@@ -4,22 +4,22 @@
     <br>
     <div class="container">
     <form>
-        <div class="d-inline-flex p-2 bd-highlight shadow text-center">
+        <div class="container-xl text-center shadow bg-gradient" style="border-bottom-width: initial>
             <div class="row">
-                <div class="shadow"></div>
-                <div class="container"><br><br>
+                <div ><br><br>
                     <ul>
-                        <li class="list-group-item me-md-4 justify-content-center">{{ disease.name }}</li>
+                        <li class="list-group-item me-md-4 ">{{ disease.name }}</li>
                     </ul>
                     <br>
                     <ul>
                         <li class="list-group-item me-md-4">{{ disease.description }}</li>
+                        <br>
                     </ul>
                 </div>
-                <div class="col-sm"></div>
             </div>
         </div>
     </form>
     </div>
+    <br>
 
 {% endblock %}
