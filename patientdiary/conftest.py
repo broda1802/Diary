@@ -1,7 +1,6 @@
 import pytest
-from django.contrib.auth.models import User, Permission
-from accounts.models import Patient
-from patientdiary.models import Drugs, Disease, Substance, Group, Clinic, Pharmacy, Doctor
+from accounts.models import CustomUser
+from patientdiary.models import Drugs, Disease, Substance, Group, Clinic, Pharmacy, Doctor, Patient
 from faker import Faker
 
 faker = Faker("pl_PL")
@@ -9,16 +8,16 @@ faker = Faker("pl_PL")
 
 @pytest.fixture
 def user():
-    return Patient.objects.create(username='abc', password='laseczek1')
+    return CustomUser.objects.create(username='abc', password='laseczek1')
 
 
 @pytest.fixture
 def patient(disease, drug, clinic, user):
     lst = []
-    for p in range(10):
-        p = Patient.objects.create(first_name=faker.text(max_nb_chars=20), last_name=faker.text(max_nb_chars=20),
-                                   Pesel=1234, phone=12345, my_history=faker.text(max_nb_chars=20),
-                                   clinic=clinic[0], user=user)
+    for x in range(10):
+        p = Patient.objects.create(user=user[0], first_name=faker.text(max_nb_chars=20),
+                                   last_name=faker.text(max_nb_chars=20), Pesel=1234, phone=12345,
+                                   my_history=faker.text(max_nb_chars=20), clinic=clinic[0])
         p.disease.set(disease)
         p.drug.set(drug)
         lst.append(p)
