@@ -10,6 +10,8 @@
      <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/coment.css' %}">
 
   </head>
+   <form method="post">
+       {% csrf_token %}
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
   {% if user.is_authenticated %}
@@ -44,10 +46,11 @@
       </ul>
     </div>
    {% if user.is_authenticated %}
-      <div> Cześć {{ user }} {{ datetime }} </div>
+      <div> Cześć {{ user }} </div>
   {% endif %}
   </div>
 </nav>
+   </form>
   <body id="bg" style="background-image: url('{% static "accounts/images/mainpage.jpg" %}');">
        {% block content %}
 

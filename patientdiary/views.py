@@ -5,10 +5,12 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, ListView, DeleteView, UpdateView, CreateView
 
-from accounts.models import Patient
+from accounts.models import CustomUser
 from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm, ClinicModelForm, PharmacyModelForm, \
     DoctorModelForm
-from patientdiary.models import Drugs, Doctor, Disease, Clinic, Pharmacy
+from patientdiary.models import Drugs, Doctor, Disease, Clinic, Pharmacy, Group, Substance, Patient
+
+
 # Create your views here.
 
 
@@ -21,6 +23,7 @@ class IndexView(View):
 class PatientDetailView(LoginRequiredMixin, DetailView):
     model = Patient
     template_name = 'patient_view.html'
+    login_url = 'login'
 
 
 class UpdatePatientView(LoginRequiredMixin, UpdateView):
@@ -31,15 +34,9 @@ class UpdatePatientView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('patient_view', kwargs={'pk': self.object.pk})
 
-    def test_func(self):
-        if self.request.user.pk == int(self.kwargs['pk']):
-            return True
-        else:
-            raise Http404
-
 
 class ContactsListView(LoginRequiredMixin, ListView):
-    model = Patient
+    model = CustomUser
     template_name = 'contacts.html'
 
     def get_context_data(self, **kwargs):
@@ -84,7 +81,13 @@ class DeleteDiseaseView(LoginRequiredMixin, DeleteView):
 class DrugsListView(LoginRequiredMixin, ListView):
     model = Drugs
     template_name = 'drugs_view.html'
-    login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['groups'] = Group.objects.all()
+        context['substances'] = Substance.objects.all()
+        context['Drugs'] = Drugs.objects.all()
+        return context
 
 
 class AddDrugView(LoginRequiredMixin, CreateView):
@@ -111,7 +114,7 @@ class DeleteDrugView(LoginRequiredMixin, DeleteView):
     model = Drugs
     template_name = 'form.html'
     success_url = "/drugs/"
-    login_url = 'login'
+
 
 
 class AddClinicView(LoginRequiredMixin, CreateView):
@@ -132,7 +135,7 @@ class DeleteClinicView(LoginRequiredMixin, DeleteView):
     model = Clinic
     template_name = 'form.html'
     success_url = "/contacts"
-    login_url = 'login'
+
 
 
 class AddPharmacyView(LoginRequiredMixin, CreateView):
@@ -153,7 +156,7 @@ class DeletePharmacyView(LoginRequiredMixin, DeleteView):
     model = Pharmacy
     template_name = 'form.html'
     success_url = "/contacts"
-    login_url = 'login'
+
 
 
 class AddDoctorView(LoginRequiredMixin, CreateView):
@@ -174,6 +177,6 @@ class DeleteDoctorView(LoginRequiredMixin, DeleteView):
     model = Doctor
     template_name = 'form.html'
     success_url = "/contacts"
-    login_url = 'login'
+
 
 

@@ -1,17 +1,17 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Patient
+from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
-        model = Patient
+        model = CustomUser
         fields = ('username', 'email')
 
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
-        model = Patient
+        model = CustomUser
         fields = ('username', 'email')

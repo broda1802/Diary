@@ -1,6 +1,6 @@
 from django import forms
 
-from accounts.models import Patient
+
 from patientdiary.models import *
 
 
@@ -45,6 +45,9 @@ class SubstanceModelForm(forms.ModelForm):
         labels = {
             'substance_name': 'nazwa substancji'
         }
+        widgets = {
+            'substance_name': forms.Select(attrs={'class': 'form-control'})
+        }
 
 
 class DrugsModelForm(forms.ModelForm):
@@ -75,6 +78,9 @@ class GroupModelForm(forms.ModelForm):
             'parent': 'grupa',
             'name': 'nazwa grupy',
             'symbol': 'symbol'
+        }
+        widgets = {
+            'parent': forms.Select(attrs={'class': 'form-control'})
         }
 
 

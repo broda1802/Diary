@@ -7,7 +7,7 @@
         <div class="bg-light p-0 rounded-3 shadow-lg mt-xl-3" style="--bs-bg-opacity: .7;">
             <div class="card-body text-center">
                      <div class="container text-center">
-                     <a href="{% url 'patient_update_view' patient.pk %}"><br>
+                     <a href="{% url 'patient_update_view' patient.pk%}"><br>
                          <button type="button" class="btn btn-secondary">Edytuj dane</button></a><br>
                          <br>
                          <ul>
@@ -23,6 +23,8 @@
                              <div><br></div>
                              <ul class="row-cols-2">
                                  <input type="text" value="Na co choruję:" readonly>
+
+
                                  {% for disease in patient.disease.all %}
                                      <input class="me-md-auto" type="text" value="{{ disease }}" readonly>
                                  {% endfor %}
@@ -33,6 +35,7 @@
                                  {% for drug in patient.drug.all %}
                                      <input class="me-md-auto" type="text" value="{{ drug }}" readonly>
                                  {% endfor %}
+
                                  <div><br></div>
                                  <textarea class="container" readonly style="width: 30%; height: 150px; ">{{ patient.my_history}}</textarea>
                              </ul>
