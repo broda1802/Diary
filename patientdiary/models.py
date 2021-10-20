@@ -33,11 +33,18 @@ class Patient(models.Model):
 class PatientDisease(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     disease = models.ForeignKey('Disease', on_delete=models.CASCADE)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.disease.name
 
 
 class PatientDrug(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     drug = models.ForeignKey('Drugs', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.drug.name
 
 
 class Disease(models.Model):
@@ -53,8 +60,8 @@ class Disease(models.Model):
     def get_update_url(self):
         return reverse('disease_update_view', args=(self.pk,))
 
-    # def __str__(self):
-    #     return self.name
+    def __str__(self):
+        return self.name
 
 
 class Substance(models.Model):

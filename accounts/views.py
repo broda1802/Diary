@@ -21,7 +21,7 @@ class SignUpView(View):
             user.save()
             patient = Patient.objects.create(user=user)
             patient.save()
-            return redirect('/accounts/login')
+            return redirect('/login')
 
             # form_class = CustomUserCreationForm
             # success_url = reverse_lazy('login')

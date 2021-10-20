@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+    <br>
+    <div class="container">
+    <form>
+        <div class="container-xl text-center shadow bg-gradient" style="border-bottom-width: initial>
+            <div class="row">
+                <div ><br><br>
+                    <ul>
+                        <li class="list-group-item me-md-4 ">{{ object.disease }}</li>
+                    </ul>
+                    <br>
+                    <ul>
+                        <li class="list-group-item me-md-4">{{ object.disease.description }}</li>
+                        <br>
+                    </ul>
+                    <ul>
+                        <li class="list-group-item me-md-4">{{ object.description }}</li>
+                        <br>
+                    </ul>
+                    <td><a href="{% url 'update_patient_disease_view' object.pk %}">
+                    <button type="button" class="btn btn-outline-info btn-sm">Edytuj</button></a>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+    <br>
+
+{% endblock %}

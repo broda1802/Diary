@@ -28,9 +28,8 @@ def test_logout():
 
 
 @pytest.mark.django_db
-def test_signup(user):
+def test_signup():
     client = Client()
-    client.force_login(user)
     response = client.get(reverse("signup"))
     assert response.status_code == 200
 
@@ -92,9 +91,9 @@ def test_contacts_not_logged():
 
 
 @pytest.mark.django_db
-def test_contacts_logged(user):
+def test_contacts_logged(patient):
     client = Client()
-    client.force_login(user)
+    client.force_login(patient.user)
     response = client.get(reverse('contacts'))
     assert response.status_code == 200
 
@@ -103,7 +102,7 @@ def test_contacts_logged(user):
 def test_patient_update_logged_get(user, patient):
     client = Client()
     client.force_login(user)
-    response = client.get(reverse('patient_update_view', kwargs={'pk': patient[0].pk}))
+    response = client.get(reverse('patient_update_view', kwargs={'pk': patient.pk}))
     assert response.status_code == 200
 
 
