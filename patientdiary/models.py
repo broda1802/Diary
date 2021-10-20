@@ -7,17 +7,37 @@ from accounts.models import CustomUser
 
 class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, unique=True, blank=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    Pesel = models.IntegerField(unique=True)
-    phone = models.IntegerField()
-    my_history = models.TextField()
-    disease = models.ManyToManyField('Disease')
-    drug = models.ManyToManyField('Drugs')
-    clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=30, null=True)
+    last_name = models.CharField(max_length=30, null=True)
+    Pesel = models.IntegerField(unique=True,null=True)
+    phone = models.IntegerField(null=True)
+    my_history = models.TextField(null=True)
+    disease = models.ManyToManyField('Disease', blank=True, through='PatientDisease')
+    drug = models.ManyToManyField('Drugs', blank=True, through='PatientDrug')
+    clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+    def get_substance_alert(self):
+        alerts = {}
+        for drug in self.drug.all():
+            for substance in drug.substances.all():
+                if substance.name in alerts:
+                    alerts[substance.name].append(drug.name)
+                else:
+                    alerts[substance.name] = [drug.name]
+        return alerts
+
+
+class PatientDisease(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    disease = models.ForeignKey('Disease', on_delete=models.CASCADE)
+
+
+class PatientDrug(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    drug = models.ForeignKey('Drugs', on_delete=models.CASCADE)
 
 
 class Disease(models.Model):
@@ -38,10 +58,10 @@ class Disease(models.Model):
 
 
 class Substance(models.Model):
-    substance_name = models.CharField(unique=True, max_length=128)
+    name = models.CharField(unique=True, max_length=128)
 
     def __str__(self):
-        return self.substance_name
+        return self.name
 
 
 class Drugs(models.Model):
@@ -50,6 +70,7 @@ class Drugs(models.Model):
     dosage = models.DecimalField(max_digits=10, decimal_places=2)
     action = models.CharField(max_length=128)
     substances = models.ManyToManyField(Substance)
+    groups = models.ForeignKey('Group', on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('drug_detail_view', args=(self.pk,))

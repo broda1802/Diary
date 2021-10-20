@@ -21,22 +21,7 @@
                              <div><br></div>
                              <input class="me-md-auto" type="text" value="Przychodnia: {{ patient.clinic }}" readonly>
                              <div><br></div>
-                             <ul class="row-cols-2">
-                                 <input type="text" value="Na co choruję:" readonly>
 
-
-                                 {% for disease in patient.disease.all %}
-                                     <input class="me-md-auto" type="text" value="{{ disease }}" readonly>
-                                 {% endfor %}
-                             </ul>
-                             <div><br></div>
-                             <ul class="row-cols-2" >
-                                 <input type="text" value="Moje leki:" readonly>
-                                 {% for drug in patient.drug.all %}
-                                     <input class="me-md-auto" type="text" value="{{ drug }}" readonly>
-                                 {% endfor %}
-
-                                 <div><br></div>
                                  <textarea class="container" readonly style="width: 30%; height: 150px; ">{{ patient.my_history}}</textarea>
                              </ul>
                      </div>

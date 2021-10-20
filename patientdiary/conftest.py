@@ -12,16 +12,33 @@ def user():
 
 
 @pytest.fixture
-def patient(disease, drug, clinic, user):
+def users():
     lst = []
     for x in range(10):
-        p = Patient.objects.create(user=user[0], first_name=faker.text(max_nb_chars=20),
-                                   last_name=faker.text(max_nb_chars=20), Pesel=1234, phone=12345,
-                                   my_history=faker.text(max_nb_chars=20), clinic=clinic[0])
+        lst.append(CustomUser.objects.create(username=x, password='laseczek1'))
+    return lst
+
+
+@pytest.fixture
+def patient(disease, drug, clinic, user):
+    p = Patient.objects.create(user=user[0], first_name=faker.text(max_nb_chars=20),
+                               last_name=faker.text(max_nb_chars=20), Pesel=1234, phone=12345,
+                               my_history=faker.text(max_nb_chars=20), clinic=clinic[0])
+    p.disease.set(disease)
+    p.drug.set(drug)
+    return p
+
+
+@pytest.fixture
+def patients(disease, drug, clinic, users):
+    lst = []
+    for user in users:
+        p = Patient.objects.create(user=user, first_name=faker.text(max_nb_chars=20),
+                               last_name=faker.text(max_nb_chars=20), Pesel=1234, phone=12345,
+                               my_history=faker.text(max_nb_chars=20), clinic=clinic[0])
         p.disease.set(disease)
         p.drug.set(drug)
         lst.append(p)
-
     return lst
 
 
