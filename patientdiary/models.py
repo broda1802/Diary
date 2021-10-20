@@ -9,7 +9,7 @@ class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, unique=True, blank=True)
     first_name = models.CharField(max_length=30, null=True)
     last_name = models.CharField(max_length=30, null=True)
-    Pesel = models.IntegerField(unique=True,null=True)
+    Pesel = models.IntegerField(unique=True, null=True)
     phone = models.IntegerField(null=True)
     my_history = models.TextField(null=True)
     disease = models.ManyToManyField('Disease', blank=True, through='PatientDisease')

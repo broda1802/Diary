@@ -9,13 +9,16 @@
             ">
             <div><br><br>
                 <ul>
-                    <li class="list-group-item me-md-4 ">{{ disease.name }}</li>
+                    <li class="list-group-item me-md-4 ">{{ object.drug }}</li>
                 </ul>
                 <br>
                 <ul>
-                    <li class="list-group-item me-md-4">{{ disease.description }}</li>
+                    <li class="list-group-item me-md-4">{{ object.drug.description }}</li>
                     <br>
                 </ul>
+                <td><a href="{% url 'update_patient_drug_view' object.pk %}">
+                    <button type="button" class="btn btn-outline-info btn-sm">Edytuj</button>
+                </a>
             </div>
     </div>
     </div>

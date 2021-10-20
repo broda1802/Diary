@@ -6,25 +6,27 @@
     <div>
         <div class="bg-light p-0 rounded-3 shadow-lg mt-xl-3" style="--bs-bg-opacity: .7;">
             <div class="card-body text-center">
-                     <div class="container text-center">
-                     <a href="{% url 'patient_update_view' patient.pk%}"><br>
-                         <button type="button" class="btn btn-secondary">Edytuj dane</button></a><br>
-                         <br>
-                         <ul>
-                             <input class="me-md-auto" type="text"  value="Imię: {{ patient.first_name }}" readonly>
-                             <div><br></div>
-                             <input class="me-md-auto" type="text"  value="Nazwisko: {{ patient.last_name }}" readonly>
-                             <div><br></div>
-                             <input class="me-md-auto" type="text"  value="Telefon: {{ patient.phone }}" readonly>
-                             <div><br></div>
-                             <input class="me-md-auto" type="text"  value="Pesel: {{ patient.Pesel }}" readonly>
-                             <div><br></div>
-                             <input class="me-md-auto" type="text" value="Przychodnia: {{ patient.clinic }}" readonly>
-                             <div><br></div>
+                <div class="container text-center">
+                    <a href="{% url 'patient_update_view' patient.pk %}"><br>
+                        <button type="button" class="btn btn-secondary">Edytuj dane</button>
+                    </a><br>
+                    <br>
+                    <ul>
+                        <input class="me-md-auto" type="text" value="Imię: {{ patient.first_name }}" readonly>
+                        <div><br></div>
+                        <input class="me-md-auto" type="text" value="Nazwisko: {{ patient.last_name }}" readonly>
+                        <div><br></div>
+                        <input class="me-md-auto" type="text" value="Telefon: {{ patient.phone }}" readonly>
+                        <div><br></div>
+                        <input class="me-md-auto" type="text" value="Pesel: {{ patient.Pesel }}" readonly>
+                        <div><br></div>
+                        <input class="me-md-auto" type="text" value="Przychodnia: {{ patient.clinic }}" readonly>
+                        <div><br></div>
 
-                                 <textarea class="container" readonly style="width: 30%; height: 150px; ">{{ patient.my_history}}</textarea>
-                             </ul>
-                     </div>
+                        <textarea class="container" readonly
+                                  style="width: 30%; height: 150px; ">{{ patient.my_history }}</textarea>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

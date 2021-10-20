@@ -12,13 +12,12 @@ def user():
     return user
 
 
-@pytest.fixture
-def users():
-    lst = []
-    for x in range(10):
-        lst.append(CustomUser.objects.create(username=x, password='laseczek1'))
-    return lst
-
+# @pytest.fixture
+# def users():
+#     lst = []
+#     for x in range(10):
+#         lst.append(CustomUser.objects.create(username=x, password='laseczek1'))
+#     return lst
 
 @pytest.fixture
 def patient(disease, drug, clinic, user):
@@ -29,18 +28,17 @@ def patient(disease, drug, clinic, user):
     p.drug.set(drug)
     return p
 
-
-@pytest.fixture
-def patients(disease, drug, clinic, users):
-    lst = []
-    for user in users:
-        p = Patient.objects.create(user=user, first_name=faker.text(max_nb_chars=20),
-                               last_name=faker.text(max_nb_chars=20), Pesel=1234, phone=12345,
-                               my_history=faker.text(max_nb_chars=20), clinic=clinic[0])
-        p.disease.set(disease)
-        p.drug.set(drug)
-        lst.append(p)
-    return lst
+# @pytest.fixture
+# def patients(disease, drug, clinic, users):
+#     lst = []
+#     for user in users:
+#         p = Patient.objects.create(user=user, first_name=faker.text(max_nb_chars=20),
+#                                last_name=faker.text(max_nb_chars=20), Pesel=1234, phone=12345,
+#                                my_history=faker.text(max_nb_chars=20), clinic=clinic[0])
+#         p.disease.set(disease)
+#         p.drug.set(drug)
+#         lst.append(p)
+#     return lst
 
 
 @pytest.fixture
@@ -57,7 +55,7 @@ def drug(substance, group):
     lst = []
     for p in range(10):
         p = Drugs.objects.create(name=faker.text(max_nb_chars=20), leaflet=faker.text(max_nb_chars=20),
-                                 dosage=1, action=faker.text(max_nb_chars=20),groups=group[0]
+                                 dosage=1, action=faker.text(max_nb_chars=20), groups=group[0]
                                  )
         p.substances.add(substance[0])
         lst.append(p)

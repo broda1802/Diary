@@ -6,12 +6,13 @@ from patientdiary.models import *
 
 class PatientModelForm(forms.ModelForm):
     class Meta:
-        fields = ['first_name', 'last_name', 'phone', 'clinic', 'my_history']
+        fields = ['first_name', 'last_name', 'phone', 'Pesel', 'clinic', 'my_history']
         model = Patient
         labels = {
             'first_name': 'Imię',
             'last_name': 'Nazwisko',
             'phone': 'Numer telefonu',
+            'Pesel': 'Numer Pesel',
             'my_history': 'Moja historia chorób',
             'clinic': 'Moja przychodnia'
         }
@@ -19,6 +20,7 @@ class PatientModelForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'Pesel': forms.TextInput(attrs={'class': 'form-control'}),
             'my_history': forms.Textarea(attrs={'class': 'form-control'}),
             'clinic': forms.Select(attrs={'class': 'form-control'})
         }
@@ -38,15 +40,30 @@ class DiseaseModelForm(forms.ModelForm):
         }
 
 
+class PatientDiseaseModelForm(forms.ModelForm):
+    class Meta:
+        model = PatientDisease
+        fields = ['disease', 'description']
+        labels = {
+            'disease': 'Wybierz chorobę z bazy',
+            'description': 'Opis historii choroby pacjenta'
+        }
+        widgets = {
+            'disease':forms.Select(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+
 class SubstanceModelForm(forms.ModelForm):
     class Meta:
         model = Substance
         fields = '__all__'
         labels = {
-            'substance_name': 'nazwa substancji'
+            'name': 'nazwa substancji'
         }
         widgets = {
-            'substance_name': forms.Select(attrs={'class': 'form-control'})
+            'name': forms.Select(attrs={'class': 'form-control'})
         }
 
 
@@ -59,7 +76,8 @@ class DrugsModelForm(forms.ModelForm):
             'leaflet': 'Ulotka',
             'dosage': 'Dawka',
             'action': 'Działanie',
-            'substances': 'Substancja'
+            'substances': 'Substancja',
+            'groups': 'Grupa'
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -67,6 +85,7 @@ class DrugsModelForm(forms.ModelForm):
             'dosage': forms.NumberInput(attrs={'class': 'form-control'}),
             'action': forms.TextInput(attrs={'class': 'form-control'}),
             'substances': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'groups': forms.Select(attrs={'class': 'form-control'}),
         }
 
 
