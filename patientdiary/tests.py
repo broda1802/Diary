@@ -114,9 +114,9 @@ def test_drug_list_view_no_login():
 
 
 @pytest.mark.django_db
-def test_drug_list_view_logged(user):
+def test_drug_list_view_logged(patient):
     client = Client()
-    client.force_login(user)
+    client.force_login(patient.user)
     response = client.get(reverse('drugs_view'))
     assert response.status_code == 200
 
@@ -129,17 +129,17 @@ def test_drug_delete_not_logged_get(drug):
 
 
 @pytest.mark.django_db
-def test_drug_delete_logged_get(user, drug):
+def test_drug_delete_logged_get(patient, drug):
     client = Client()
-    client.force_login(user)
+    client.force_login(patient.user)
     response = client.get(reverse('drug_delete_view', kwargs={'pk': drug[0].pk}))
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
-def test_drug_delete_logged_post(user, drug):
+def test_drug_delete_logged_post(patient, drug):
     client = Client()
-    client.force_login(user)
+    client.force_login(patient.user)
     response = client.post(reverse('drug_delete_view', kwargs={'pk': drug[0].pk}))
     assert response.status_code == 302
 
@@ -207,9 +207,9 @@ def test_drug_update_logged_post(user, substance, drug):
 
 
 @pytest.mark.django_db
-def test_drug_detail_logged(user, drug):
+def test_drug_detail_logged(patient, drug):
     client = Client()
-    client.force_login(user)
+    client.force_login(patient.user)
     response = client.get(reverse('drug_detail_view', kwargs={'pk': drug[0].pk}))
     assert response.status_code == 200
 
@@ -229,9 +229,9 @@ def test_disease_list_view_no_login():
 
 
 @pytest.mark.django_db
-def test_disease_list_view_logged(user):
+def test_disease_list_view_logged(patient):
     client = Client()
-    client.force_login(user)
+    client.force_login(patient.user)
     response = client.get(reverse('diseases_view'))
     assert response.status_code == 200
 
@@ -244,9 +244,9 @@ def test_disease_list_view_not_logged():
 
 
 @pytest.mark.django_db
-def test_disease_delete_logged_get(user, disease):
+def test_disease_delete_logged_get(patient, disease):
     client = Client()
-    client.force_login(user)
+    client.force_login(patient.user)
     response = client.get(reverse('disease_delete_view', kwargs={'pk': disease[0].pk}))
     assert response.status_code == 200
 

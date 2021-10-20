@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404, request
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
@@ -7,8 +6,9 @@ from django.views.generic import DetailView, ListView, DeleteView, UpdateView, C
 
 from accounts.models import CustomUser
 from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm, ClinicModelForm, PharmacyModelForm, \
-    DoctorModelForm
-from patientdiary.models import Drugs, Doctor, Disease, Clinic, Pharmacy, Group, Substance, Patient, PatientDisease
+    DoctorModelForm, PatientDiseaseModelForm
+from patientdiary.models import Drugs, Doctor, Disease, Clinic, Pharmacy, Group, Substance, Patient, PatientDisease, \
+    PatientDrug
 
 
 # Create your views here.
@@ -82,25 +82,6 @@ class AddDiseaseView(LoginRequiredMixin, CreateView):
         return context
 
 
-class AddPatientDiseaseView(LoginRequiredMixin, CreateView):
-    model = PatientDisease
-    template_name = 'form.html'
-    # form_class = DiseaseModelForm
-    success_url = "/diseases/"
-    fields = ['disease']
-
-    def form_valid(self, form):
-        patient = Patient.objects.get(user=self.request.user)
-        f = form.save(commit=False)
-        f.patient = patient
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['patient'] = Patient.objects.get(user=self.request.user)
-        return context
-
-
 class DiseaseDetailView(LoginRequiredMixin, DetailView):
     model = Disease
     template_name = 'disease_detail_view.html'
@@ -124,45 +105,10 @@ class UpdateDiseaseView(LoginRequiredMixin, UpdateView):
         return context
 
 
-class DeletePatientDiseaseView(LoginRequiredMixin, DeleteView):
-    model = PatientDisease
-    template_name = 'form.html'
-    success_url = "/diseases/"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['patient'] = Patient.objects.get(user=self.request.user)
-        # context['disease'] = PatientDisease.objects.get(disease=self.kwargs['pk':])
-        return context
-
-
-class UpdatePatientDiseaseView(LoginRequiredMixin, UpdateView):
-    model = PatientDisease
-    template_name = 'form.html'
-    fields = '__all__'
-    success_url = "/diseases/"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['patient'] = Patient.objects.get(user=self.request.user)
-        # context['disease'] = PatientDisease.objects.get(disease=self.kwargs['pk':])
-        return context
-
-
 class DeleteDiseaseView(LoginRequiredMixin, DeleteView):
     model = Disease
     template_name = 'form.html'
     success_url = "/diseases/"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['patient'] = Patient.objects.get(user=self.request.user)
-        return context
-
-
-class PatientDiseaseDetailView(LoginRequiredMixin, DetailView):
-    model = PatientDisease
-    template_name = 'patient_disease_detail_view.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -180,6 +126,7 @@ class DrugsListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['patient'] = Patient.objects.get(user=self.request.user)
+        context['drugs'] = Drugs.objects.all()
         return context
 
 
@@ -220,6 +167,110 @@ class UpdateDrugView(LoginRequiredMixin, UpdateView):
 
 class DeleteDrugView(LoginRequiredMixin, DeleteView):
     model = Drugs
+    template_name = 'form.html'
+    success_url = "/drugs/"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+# PATIENTDISEASE
+class AddPatientDiseaseView(LoginRequiredMixin, CreateView):
+    model = PatientDisease
+    template_name = 'form.html'
+    form_class = PatientDiseaseModelForm
+    success_url = "/diseases/"
+    # fields = ['disease']
+
+    def form_valid(self, form):
+        patient = Patient.objects.get(user=self.request.user)
+        f = form.save(commit=False)
+        f.patient = patient
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+
+class PatientDiseaseDetailView(LoginRequiredMixin, DetailView):
+    model = PatientDisease
+    template_name = 'patient_disease_detail_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+
+class UpdatePatientDiseaseView(LoginRequiredMixin, UpdateView):
+    model = PatientDisease
+    template_name = 'patient_disease_update.html'
+    fields = ['description']
+    # form_class = DiseaseModelForm
+    success_url = "/diseases/"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+
+class DeletePatientDiseaseView(LoginRequiredMixin, DeleteView):
+    model = PatientDisease
+    template_name = 'form.html'
+    success_url = "/diseases/"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+# PATIENTDRUG
+class AddPatientDrugView(LoginRequiredMixin, CreateView):
+    model = PatientDrug
+    template_name = 'form.html'
+    success_url = "/drugs/"
+    fields = ['drug']
+
+    def form_valid(self, form):
+        patient = Patient.objects.get(user=self.request.user)
+        f = form.save(commit=False)
+        f.patient = patient
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+
+class PatientDrugDetailView(LoginRequiredMixin, DetailView):
+    model = PatientDrug
+    template_name = 'patient_drug_detail_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+
+class UpdatePatientDrugView(LoginRequiredMixin, UpdateView):
+    model = PatientDrug
+    template_name = 'form.html'
+    fields = '__all__'
+    success_url = "/drugs/"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+
+class DeletePatientDrugView(LoginRequiredMixin, DeleteView):
+    model = PatientDrug
     template_name = 'form.html'
     success_url = "/drugs/"
 

@@ -2,48 +2,49 @@
 
 {% block content %}
 
+    <div class="container ">
+        <br>
+        <br>
+        <br>
+        <style>
+            table {
+                background-color: white;
+            }
+        </style>
+<a href="{% url 'disease_add_view' %}">
+                <button type="button" class="btn-secondary btn-sm disabled" tabindex="-1" role="button"
+                        aria-disabled="true">Dodaj chorobę do bazy chorób
+                </button>
+            </a>
+        <div class="container text-center">
 
-<div class="container text-center">
-<br>
-    <br>
-    <br>
-<style>
-table{
-    background-color: white;
-}
-</style>
-
-   <div class="container text-center">
-          <a href="{% url 'disease_add_view' %}">
-      <button type="button" class="btn-secondary btn-sm disabled" tabindex="-1" role="button" aria-disabled="true">Dodaj chorobę do bazy</button></a
-   </div>
-
-   <div class="container text-center">
-          <a href="{% url 'patient_disease_add_view' %}">
-      <button type="button" class="btn-secondary btn-sm disabled" tabindex="-1" role="button" aria-disabled="true">Dodaj chorobę  </button></a
-   </div>
-
-<table class="table " >
-<br>
-  <tbody>
-  <br>
-  {% for disease in patient.patientdisease_set.all %}
-    <tr>
-      <th scope="row"><a class="nav-link active" href="{% url 'patient_disease_detail_view' disease.pk %}">{{ disease.disease.name}} </a></th>
-
-        <th scope></th>
-        <td>
-        <a href="{% url 'patient_disease_delete_view' disease.pk %}">
-            <button type="button" class="btn btn-outline-danger btn-sm">Usuń</button></a>
-        </td>
-        </th>
-
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-
-</div>
+            <a href="{% url 'patient_disease_add_view' %}">
+                <button type="button" class="btn-secondary btn-sm disabled" tabindex="-1" role="button"
+                        aria-disabled="true">Dodaj chorobę pacjentowi
+                </button>
+            </a>
+        </div>
+        <table class="table ">
+            <br>
+            <tbody>
+            <br>
+            {% for disease in patient.patientdisease_set.all %}
+                <tr>
+                    <th scope="row"><a class="nav-link active"
+                                       href="{% url 'patient_disease_detail_view' disease.pk %}">{{ disease.disease.name }} </a>
+                    </th>
+                    <th scope></th>
+                    <td>
+                        <a href="{% url 'patient_disease_delete_view' disease.pk %}">
+                            <button type="button" class="btn btn-outline-danger btn-sm">Usuń</button>
+                        </a>
+                    </td>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
 
 
