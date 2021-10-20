@@ -10,4 +10,6 @@ admin.site.register(Group)
 admin.site.register(Clinic)
 admin.site.register(Pharmacy)
 admin.site.register(Doctor)
+admin.site.register(PatientDisease)
+admin.site.register(PatientDrug)
 
