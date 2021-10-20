@@ -98,13 +98,14 @@ def test_contacts_logged(user):
     response = client.get(reverse('contacts'))
     assert response.status_code == 200
 
-# @pytest.mark.django_db
-# def test_patient_update_logged_get(user, patient):
-#     client = Client()
-#     client.force_login(user)
-#     response = client.get(reverse('patient_update_view', kwargs={'pk': patient[0].pk}))
-#     assert response.status_code == 200
-#
+
+@pytest.mark.django_db
+def test_patient_update_logged_get(user, patient):
+    client = Client()
+    client.force_login(user)
+    response = client.get(reverse('patient_update_view', kwargs={'pk': patient[0].pk}))
+    assert response.status_code == 200
+
 
 @pytest.mark.django_db
 def test_drug_list_view_no_login():

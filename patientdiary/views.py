@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404
+from django.http import Http404, request
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
@@ -51,6 +51,12 @@ class DiseasesListView(LoginRequiredMixin, ListView):
     model = Disease
     template_name = 'diseases_view.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.get(user=self.request.user)
+        return context
+
+
 
 class AddDiseaseView(LoginRequiredMixin, CreateView):
     model = Disease
@@ -82,12 +88,12 @@ class DrugsListView(LoginRequiredMixin, ListView):
     model = Drugs
     template_name = 'drugs_view.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['groups'] = Group.objects.all()
-        context['substances'] = Substance.objects.all()
-        context['Drugs'] = Drugs.objects.all()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['groups'] = Group.objects.all()
+    #     context['substances'] = Substance.objects.()
+    #     context['drugs'] = Drugs.objects.all()kwargs={'pk': self.object.pk}
+    #     return context
 
 
 class AddDrugView(LoginRequiredMixin, CreateView):

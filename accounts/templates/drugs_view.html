@@ -19,7 +19,16 @@ table{
             <button type="button" class="btn-secondary btn-sm disabled" tabindex="-1" role="button" aria-disabled="true">Dodaj lek   </button></a>
     </div>
 <br>
-
+<table>
+    {% for substance,drugs in user.patient.get_substance_alert.items %}
+        <tr>
+        <th>{{ substance }}</th>
+        {% for drug in drugs  %}
+            <td>{{ drug }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
  <table class="table table-sm" >
 
   <thead>
@@ -52,12 +61,10 @@ table{
           {% endfor %}
           </select>
       </td>
-      <td>{% if substance in substances == substance%}
+      <td>
           <a></a>
-        sadasd
+      </td>
 
-        {% endif %}
-    </td>
       <td><a href="{% url 'drug_update_view' drug.pk %}">
             <button type="button" class="btn btn-outline-info btn-sm">Edytuj</button></a>
 

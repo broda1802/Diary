@@ -22,7 +22,8 @@ table{
 <br>
   <tbody>
   <br>
-  {% for disease in disease_list %}
+  {{ patient.disease.all}}
+  {% for disease in patient.disease_set.all %}
     <tr>
       <th scope="row"><a class="nav-link active" href="{% url 'disease_detail_view' disease.pk %}">{{ disease.name}} </a></th>
 
