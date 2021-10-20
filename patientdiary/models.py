@@ -17,7 +17,7 @@ class Patient(models.Model):
     clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return self.user.username
 
     def get_substance_alert(self):
         alerts = {}
@@ -53,8 +53,8 @@ class Disease(models.Model):
     def get_update_url(self):
         return reverse('disease_update_view', args=(self.pk,))
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 class Substance(models.Model):
