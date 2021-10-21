@@ -258,7 +258,7 @@ class PatientDrugDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class UpdatePatientDrugView(LoginRequiredMixin, UpdateView):
+class DetailPatientDrugView(LoginRequiredMixin, DetailView):
     model = PatientDrug
     template_name = 'form.html'
     fields = '__all__'

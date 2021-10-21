@@ -9,7 +9,7 @@ faker = Faker("pl_PL")
 
 @pytest.fixture
 def user():
-    user = CustomUser.objects.create_user(username="username", email="email", password="password1")
+    user = CustomUser.objects.create_user(username="heniek", email="email", password="password1")
     return user
 
 
@@ -26,8 +26,7 @@ def patient(disease, drug, clinic, user):
     p = Patient.objects.create(user=user, first_name=faker.text(max_nb_chars=20),
                                last_name=faker.text(max_nb_chars=20), Pesel=1234, phone=12345,
                                my_history=faker.text(max_nb_chars=20), clinic=clinic[0])
-    p.disease.set(disease)
-    p.drug.set(drug)
+
     return p
 
 
