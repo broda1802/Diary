@@ -6,7 +6,7 @@ from django.views.generic import DetailView, ListView, DeleteView, UpdateView, C
 
 from accounts.models import CustomUser
 from patientdiary.forms import DiseaseModelForm, DrugsModelForm, PatientModelForm, ClinicModelForm, PharmacyModelForm, \
-    DoctorModelForm, PatientDiseaseModelForm
+    DoctorModelForm, PatientDiseaseModelForm, PatientDrugModelForm
 from patientdiary.models import Drugs, Doctor, Disease, Clinic, Pharmacy, Group, Substance, Patient, PatientDisease, \
     PatientDrug
 
@@ -209,7 +209,8 @@ class UpdatePatientDiseaseView(LoginRequiredMixin, UpdateView):
     model = PatientDisease
     template_name = 'patient_disease_update.html'
     fields = ['description']
-    # form_class = DiseaseModelForm
+    # form_class = PatientDiseaseModelForm
+
     success_url = "/diseases/"
 
     def get_context_data(self, **kwargs):
@@ -233,7 +234,7 @@ class AddPatientDrugView(LoginRequiredMixin, CreateView):
     model = PatientDrug
     template_name = 'form.html'
     success_url = "/drugs/"
-    fields = ['drug']
+    form_class = PatientDrugModelForm
 
     def form_valid(self, form):
         patient = Patient.objects.get(user=self.request.user)

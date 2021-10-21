@@ -50,8 +50,19 @@ class PatientDiseaseModelForm(forms.ModelForm):
         }
         widgets = {
             'disease':forms.Select(attrs={'class': 'form-control'}),
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+
+class PatientDrugModelForm(forms.ModelForm):
+    class Meta:
+        model = PatientDrug
+        fields = ['drug']
+        labels = {
+            'drug': 'Wybierz lek z bazy'
+        }
+        widgets = {
+            'drug': forms.Select(attrs={'class': 'form-control'}),
         }
 
 
