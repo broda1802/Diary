@@ -30,9 +30,9 @@
             <br>
             {% for disease in patient.patientdisease_set.all %}
                 <tr>
-                    <th scope="row"><a class="nav-link active"
+                    <td scope="row"><a class="nav-link active"
                                        href="{% url 'patient_disease_detail_view' disease.pk %}">{{ disease.disease.name }} </a>
-                    </th>
+                    </td>
                     <th scope></th>
                     <td>
                         <a href="{% url 'patient_disease_delete_view' disease.pk %}">

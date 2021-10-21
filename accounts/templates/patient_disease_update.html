@@ -5,15 +5,12 @@
     <br>
     <div class="container-xl text-center shadow bg-gradient" style="border-bottom-width: initial>
     <table class=" center">
-    <form method="post">
+    <form method="POST" action="">
         {% csrf_token %}
         <a>Opis mojego przypadku</a>
-
-        <textarea class="container">{{ patientdisease.description }}</textarea>
-
-        <input type="submit" class="btn-secondary btn-sm disabled" tabindex="-1" role="button"
-               aria-disabled="true" value="Zapisz">
-
+        {{ form.description }}
+{#        <textarea name="" class="form-control">{{ patientdisease.description }}</textarea>#}
+        <input type="submit" class="btn-secondary btn-sm disabled"  value="Zapisz">
 
     </form>
 {% endblock %}
