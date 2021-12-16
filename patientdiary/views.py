@@ -61,6 +61,7 @@ class ContactsListView(LoginRequiredMixin, ListView):
 class DiseasesListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Disease.objects.filter(patient=Patient.objects.get(user=self.request.user))
+
     model = Disease
     template_name = 'diseases_view.html'
 
@@ -175,12 +176,14 @@ class DeleteDrugView(LoginRequiredMixin, DeleteView):
         context['patient'] = Patient.objects.get(user=self.request.user)
         return context
 
+
 # PATIENTDISEASE
 class AddPatientDiseaseView(LoginRequiredMixin, CreateView):
     model = PatientDisease
     template_name = 'form.html'
     form_class = PatientDiseaseModelForm
     success_url = "/diseases/"
+
     # fields = ['disease']
 
     def form_valid(self, form):
@@ -228,6 +231,7 @@ class DeletePatientDiseaseView(LoginRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['patient'] = Patient.objects.get(user=self.request.user)
         return context
+
 
 # PATIENTDRUG
 class AddPatientDrugView(LoginRequiredMixin, CreateView):
@@ -384,4 +388,3 @@ class DeleteDoctorView(LoginRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['patient'] = Patient.objects.get(user=self.request.user)
         return context
-

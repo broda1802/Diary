@@ -1,6 +1,5 @@
 from django import forms
 
-
 from patientdiary.models import *
 
 
@@ -49,7 +48,7 @@ class PatientDiseaseModelForm(forms.ModelForm):
             'description': 'Opis historii choroby pacjenta'
         }
         widgets = {
-            'disease':forms.Select(attrs={'class': 'form-control'}),
+            'disease': forms.Select(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
@@ -167,5 +166,3 @@ class DoctorModelForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'medical_specialization': forms.TextInput(attrs={'class': 'form-control'})
         }
-
-
